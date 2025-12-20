@@ -1,0 +1,35 @@
+[
+  {
+    "id": "1",
+    "title": "10 Këshilla Esenciale për Shtatzëninë e Parë",
+    "excerpt": "Udhëzues i plotë për gra që presin fëmijën e tyre të parë, me këshilla praktike dhe mbështetje profesionale.",
+    "content": "Shtatzënia e parë është një përvojë e jashtëzakonshme, por edhe plot me pyetje dhe pasiguri. Në këtë artikull, do të ndajmë 10 këshilla që do t'ju ndihmojnë të kaloni këtë periudhë sa më mirë...\n\n1. Kujdesuni për ushqimin tuaj...\n2. Bëni kontroll të rregullt mjekësor...\n3. Relaksohuni dhe merrni kohë për veten...",
+    "author": "Dr. Anjeza Hoxha",
+    "category": "Shtatzënia",
+    "date": "2025-01-10",
+    "imageUrl": "/placeholder.svg?height=400&width=600",
+    "theme": "girl"
+  },
+  {
+    "id": "2",
+    "title": "Si të Menaxhoni Stresin pas Lindjes",
+    "excerpt": "Teknika dhe strategji për të përballuar stresin dhe ankthin që vjen me periudhën postnatale.",
+    "content": "Periudha pas lindjes mund të jetë sfiduese, si fizikisht ashtu edhe emocionalisht. Këtu janë disa mënyra për të menaxhuar stresin...\n\nPërfshirja e familjes në kujdesin e foshnjës, pushimi i mjaftueshëm, dhe kërkimi i ndihmës profesionale janë të gjitha hapa të rëndësishëm...",
+    "author": "Psikologia Elira Kola",
+    "category": "Shëndeti Mendor",
+    "date": "2025-01-15",
+    "imageUrl": "/placeholder.svg?height=400&width=600",
+    "theme": "boy"
+  },
+  {
+    "id": "3",
+    "title": "Ushqimi i Shëndetshëm gjatë Shtatzënisë",
+    "excerpt": "Çfarë duhet të hani dhe çfarë duhet të shmangni gjatë periudhës së shtatzënisë për shëndetin tuaj dhe të foshnjës.",
+    "content": "Ushqimi luan një rol kyç në zhvillimin e shëndetshëm të foshnjës. Këtu janë rekomandimet tona...\n\nPërfshirja e vitaminave, proteinave, dhe lëngjeve të mjaftueshme është thelbësore. Shmangni ushqimet e papërpunuara dhe mbani një dietë të ekuilibruar...",
+    "author": "Nutricionist Ledia Shehu",
+    "category": "Ushqimi",
+    "date": "2025-01-20",
+    "imageUrl": "/placeholder.svg?height=400&width=600",
+    "theme": "girl"
+  }
+]
