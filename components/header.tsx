@@ -4,12 +4,9 @@ import Link from "next/link"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Modal } from "@/components/modal"
-import { ContactForm } from "@/components/contact-form"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
 
   return (
     <>
@@ -27,7 +24,7 @@ export function Header() {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-6">
               <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">
-                Ballina
+                Home
               </Link>
               <Link href="/about" className="text-sm font-medium hover:text-primary transition-colors">
                 Rreth Nesh
@@ -44,7 +41,7 @@ export function Header() {
               <Link href="/articles" className="text-sm font-medium hover:text-primary transition-colors">
                 Blog
               </Link>
-              <Button onClick={() => setIsContactModalOpen(true)}>Na Kontaktoni</Button>
+              <Link href="/contact"><Button>Na Kontaktoni</Button></Link>
             </nav>
 
             {/* Mobile Menu Button */}
@@ -61,7 +58,7 @@ export function Header() {
                 className="text-sm font-medium hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Ballina
+                Home
               </Link>
               <Link
                 href="/about"
@@ -98,23 +95,11 @@ export function Header() {
               >
                 Blog
               </Link>
-              <Button
-                onClick={() => {
-                  setIsContactModalOpen(true)
-                  setIsMenuOpen(false)
-                }}
-                className="w-full"
-              >
-                Na Kontaktoni
-              </Button>
+              <Link href="/contact"><Button onClick={() => setIsMenuOpen(false)} className="w-full">Na Kontaktoni</Button></Link>
             </nav>
           )}
         </div>
       </header>
-
-      <Modal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} title="Na Kontaktoni">
-        <ContactForm onSuccess={() => setIsContactModalOpen(false)} />
-      </Modal>
     </>
   )
 }
