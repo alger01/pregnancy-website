@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { readData } from "@/lib/file-storage"
+import { getErrorMessage, getErrorStatus } from "@/lib/error-handler"
 import type { Article } from "@/types"
 
 export async function GET() {
@@ -9,6 +10,9 @@ export async function GET() {
     const sortedArticles = articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     return NextResponse.json(sortedArticles)
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch articles" }, { status: 500 })
+    console.error("[v0] Fetch articles error:", error)
+    const errorMessage = getErrorMessage(error)
+    const status = getErrorStatus(error)
+    return NextResponse.json({ message: errorMessage }, { status })
   }
 }

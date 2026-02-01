@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import nodemailer from "nodemailer"
+import { getErrorMessage, getErrorStatus } from "@/lib/error-handler"
 
 export async function POST(request: Request) {
   try {
@@ -8,7 +9,6 @@ export async function POST(request: Request) {
     const ADMIN_EMAIL = process.env.ADMIN_EMAIL 
     const GMAIL_USER = process.env.GMAIL_USER
     const GMAIL_PASS = process.env.GMAIL_PASS
-    console.log(GMAIL_USER, GMAIL_PASS)
     if (!GMAIL_USER || !GMAIL_PASS) {
       return NextResponse.json({ message: "SMTP credentials not set" }, { status: 500 })
     }
@@ -46,10 +46,11 @@ export async function POST(request: Request) {
       // Send email
       await transporter.sendMail(emailContent)
 
-      console.log("[v0] Email sent to:", ADMIN_EMAIL)
       return NextResponse.json({ message: "Email sent successfully" })
   } catch (error) {
     console.error("[v0] Send email error:", error)
-    return NextResponse.json({ message: "Failed to send email" }, { status: 500 })
+    const errorMessage = getErrorMessage(error)
+    const status = getErrorStatus(error)
+    return NextResponse.json({ message: errorMessage }, { status })
   }
 }

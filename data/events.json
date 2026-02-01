@@ -3,15 +3,25 @@
     "id": "1766241356591",
     "title": "provaq",
     "description": "vjhknl",
-    "date": "2025-12-21",
+    "date": "2026-12-21",
     "time": "17:35",
     "location": "online",
     "address": "",
     "imageUrl": "",
-    "registrations": [],
+    "registrations": [
+      {
+        "id": "1767110298911",
+        "eventId": "1766241356591",
+        "name": "Alger Qesari",
+        "email": "alice@example.com",
+        "phone": "0699569040",
+        "message": "prov",
+        "registeredAt": "2025-12-30T15:58:18.911Z"
+      }
+    ],
     "theme": "boy"
   },
-    {
+  {
     "id": "17662413565919",
     "title": "provaq",
     "description": "vjhknl",
@@ -23,7 +33,7 @@
     "registrations": [],
     "theme": "boy"
   },
-    {
+  {
     "id": "17662413565918",
     "title": "provaq",
     "description": "vjhknl",
@@ -35,7 +45,7 @@
     "registrations": [],
     "theme": "boy"
   },
-    {
+  {
     "id": "17662413565917",
     "title": "provaq",
     "description": "vjhknl",
@@ -47,7 +57,7 @@
     "registrations": [],
     "theme": "boy"
   },
-    {
+  {
     "id": "17662413565916",
     "title": "provaq",
     "description": "vjhknl",
@@ -59,7 +69,7 @@
     "registrations": [],
     "theme": "boy"
   },
-    {
+  {
     "id": "17662413565915",
     "title": "provaq",
     "description": "vjhknl",
@@ -71,7 +81,7 @@
     "registrations": [],
     "theme": "boy"
   },
-    {
+  {
     "id": "17662413565914",
     "title": "provaq",
     "description": "vjhknl",
@@ -83,7 +93,7 @@
     "registrations": [],
     "theme": "boy"
   },
-    {
+  {
     "id": "17662413565913",
     "title": "provaq",
     "description": "vjhknl",
@@ -95,7 +105,7 @@
     "registrations": [],
     "theme": "boy"
   },
-    {
+  {
     "id": "17662413565912",
     "title": "provaq",
     "description": "vjhknl",

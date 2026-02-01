@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { readData, writeData } from "@/lib/file-storage"
 import { requireAuth } from "@/lib/auth"
+import { getErrorMessage, getErrorStatus } from "@/lib/error-handler"
 import type { Article } from "@/types"
 
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -28,7 +29,9 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     return NextResponse.json(articles[articleIndex])
   } catch (error) {
     console.error("[v0] Update article error:", error)
-    return NextResponse.json({ message: "Unauthorized or failed to update article" }, { status: 401 })
+    const errorMessage = getErrorMessage(error)
+    const status = getErrorStatus(error)
+    return NextResponse.json({ message: errorMessage }, { status })
   }
 }
 
@@ -49,6 +52,8 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
     return NextResponse.json({ message: "Article deleted successfully" })
   } catch (error) {
     console.error("[v0] Delete article error:", error)
-    return NextResponse.json({ message: "Unauthorized or failed to delete article" }, { status: 401 })
+    const errorMessage = getErrorMessage(error)
+    const status = getErrorStatus(error)
+    return NextResponse.json({ message: errorMessage }, { status })
   }
 }

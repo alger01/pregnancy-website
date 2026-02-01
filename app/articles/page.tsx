@@ -19,8 +19,18 @@ export default function ArticlesPage() {
 
   useEffect(() => {
     fetch("/api/articles")
-      .then((res) => res.json())
+      .then(async (res) => {
+        if (!res.ok) {
+          const error = await res.json()
+          throw new Error(error.message || "Failed to fetch articles")
+        }
+        return res.json()
+      })
       .then((data) => setArticles(data))
+      .catch((error) => {
+        console.error("Error fetching articles:", error)
+        // Optionally show a toast notification here if needed
+      })
   }, [])
 
   useEffect(() => {

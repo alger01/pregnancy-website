@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Plus, Edit, Trash2 } from "lucide-react"
 import { Modal } from "@/components/modal"
 import { ArticleForm } from "@/components/article-form"
+import { handleApiError } from "@/lib/api-client"
 import type { Article } from "@/types"
 import { useToast } from "@/hooks/use-toast"
 
@@ -18,8 +19,22 @@ export default function AdminArticlesPage() {
 
   const fetchArticles = () => {
     fetch("/api/articles")
-      .then((res) => res.json())
+      .then(async (res) => {
+        if (!res.ok) {
+          const error = await res.json()
+          throw new Error(error.message || "Failed to fetch articles")
+        }
+        return res.json()
+      })
       .then((data) => setArticles(data))
+      .catch((error) => {
+        console.error("Error fetching articles:", error)
+        toast({
+          title: "Gabim",
+          description: error.message || "Dështoi marrja e artikujve",
+          variant: "destructive",
+        })
+      })
   }
 
   useEffect(() => {
@@ -44,7 +59,10 @@ export default function AdminArticlesPage() {
     try {
       const response = await fetch(`/api/admin/articles/${articleId}`, { method: "DELETE" })
 
-      if (!response.ok) throw new Error("Failed to delete")
+      if (!response.ok) {
+        const errorMessage = await handleApiError(null, response)
+        throw new Error(errorMessage)
+      }
 
       toast({
         title: "Sukses",
@@ -53,9 +71,10 @@ export default function AdminArticlesPage() {
 
       fetchArticles()
     } catch (error) {
+      const errorMessage = await handleApiError(error)
       toast({
         title: "Gabim",
-        description: "Ndodhi një gabim gjatë fshirjes",
+        description: errorMessage,
         variant: "destructive",
       })
     }

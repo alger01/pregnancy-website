@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { readData } from "@/lib/file-storage"
 import { createToken } from "@/lib/jwt"
+import { getErrorMessage, getErrorStatus } from "@/lib/error-handler"
 import type { User } from "@/types"
 
 export async function POST(request: Request) {
@@ -47,6 +48,8 @@ export async function POST(request: Request) {
     return response
   } catch (error) {
     console.error("[v0] Login error:", error)
-    return NextResponse.json({ message: "Internal server error" }, { status: 500 })
+    const errorMessage = getErrorMessage(error)
+    const status = getErrorStatus(error)
+    return NextResponse.json({ message: errorMessage }, { status })
   }
 }

@@ -20,8 +20,18 @@ export default function EventsPage() {
 
   useEffect(() => {
     fetch("/api/events")
-      .then((res) => res.json())
+      .then(async (res) => {
+        if (!res.ok) {
+          const error = await res.json()
+          throw new Error(error.message || "Failed to fetch events")
+        }
+        return res.json()
+      })
       .then((data) => setEvents(data))
+      .catch((error) => {
+        console.error("Error fetching events:", error)
+        // Optionally show a toast notification here if needed
+      })
   }, [])
 
   useEffect(() => {

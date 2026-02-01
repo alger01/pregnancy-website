@@ -14,6 +14,11 @@ export async function readData<T>(filename: string): Promise<T[]> {
 }
 
 export async function writeData<T>(filename: string, data: T[]): Promise<void> {
-  const filePath = path.join(DATA_DIR, filename)
-  await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8")
+  try {
+    const filePath = path.join(DATA_DIR, filename)
+    await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8")
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error"
+    throw new Error(`Failed to write data to ${filename}: ${errorMessage}`)
+  }
 }

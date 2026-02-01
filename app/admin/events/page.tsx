@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Plus, Edit, Trash2, Users } from "lucide-react"
 import { Modal } from "@/components/modal"
 import { EventForm } from "@/components/event-form"
+import { handleApiError } from "@/lib/api-client"
 import type { Event } from "@/types"
 import { useToast } from "@/hooks/use-toast"
 
@@ -18,8 +19,22 @@ export default function AdminEventsPage() {
 
   const fetchEvents = () => {
     fetch("/api/events")
-      .then((res) => res.json())
+      .then(async (res) => {
+        if (!res.ok) {
+          const error = await res.json()
+          throw new Error(error.message || "Failed to fetch events")
+        }
+        return res.json()
+      })
       .then((data) => setEvents(data))
+      .catch((error) => {
+        console.error("Error fetching events:", error)
+        toast({
+          title: "Gabim",
+          description: error.message || "Dështoi marrja e eventeve",
+          variant: "destructive",
+        })
+      })
   }
 
   useEffect(() => {
@@ -44,7 +59,10 @@ export default function AdminEventsPage() {
     try {
       const response = await fetch(`/api/admin/events/${eventId}`, { method: "DELETE" })
 
-      if (!response.ok) throw new Error("Failed to delete")
+      if (!response.ok) {
+        const errorMessage = await handleApiError(null, response)
+        throw new Error(errorMessage)
+      }
 
       toast({
         title: "Sukses",
@@ -53,9 +71,10 @@ export default function AdminEventsPage() {
 
       fetchEvents()
     } catch (error) {
+      const errorMessage = await handleApiError(error)
       toast({
         title: "Gabim",
-        description: "Ndodhi një gabim gjatë fshirjes",
+        description: errorMessage,
         variant: "destructive",
       })
     }

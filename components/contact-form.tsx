@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
+import { handleApiError } from "@/lib/api-client"
 import { Calendar, MapPin, Clock, Video } from "lucide-react"
 import type { Event } from "@/types"
 
@@ -41,7 +42,10 @@ export function ContactForm({ event, onSuccess }: ContactFormProps) {
         }),
       })
 
-      if (!response.ok) throw new Error("Failed to submit")
+      if (!response.ok) {
+        const errorMessage = await handleApiError(null, response)
+        throw new Error(errorMessage)
+      }
 
       toast({
         title: "Sukses",
@@ -53,9 +57,10 @@ export function ContactForm({ event, onSuccess }: ContactFormProps) {
       setFormData({ name: "", email: "", phone: "", message: "" })
       onSuccess?.()
     } catch (error) {
+      const errorMessage = await handleApiError(error)
       toast({
         title: "Gabim",
-        description: "Ndodhi një gabim. Ju lutem provoni përsëri.",
+        description: errorMessage,
         variant: "destructive",
       })
     } finally {

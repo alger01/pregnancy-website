@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { readData, writeData } from "@/lib/file-storage"
 import { requireAuth } from "@/lib/auth"
+import { getErrorMessage, getErrorStatus } from "@/lib/error-handler"
 import type { Article } from "@/types"
 
 export async function POST(request: Request) {
@@ -33,6 +34,8 @@ export async function POST(request: Request) {
     return NextResponse.json(newArticle, { status: 201 })
   } catch (error) {
     console.error("[v0] Create article error:", error)
-    return NextResponse.json({ message: "Unauthorized or failed to create article" }, { status: 401 })
+    const errorMessage = getErrorMessage(error)
+    const status = getErrorStatus(error)
+    return NextResponse.json({ message: errorMessage }, { status })
   }
 }

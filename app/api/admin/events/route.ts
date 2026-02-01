@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { readData, writeData } from "@/lib/file-storage"
 import { requireAuth } from "@/lib/auth"
+import { getErrorMessage, getErrorStatus } from "@/lib/error-handler"
 import type { Event } from "@/types"
 
 export async function POST(request: Request) {
@@ -35,6 +36,8 @@ export async function POST(request: Request) {
     return NextResponse.json(newEvent, { status: 201 })
   } catch (error) {
     console.error("[v0] Create event error:", error)
-    return NextResponse.json({ message: "Unauthorized or failed to create event" }, { status: 401 })
+    const errorMessage = getErrorMessage(error)
+    const status = getErrorStatus(error)
+    return NextResponse.json({ message: errorMessage }, { status })
   }
 }

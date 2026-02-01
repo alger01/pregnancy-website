@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { readData, writeData } from "@/lib/file-storage"
+import { getErrorMessage, getErrorStatus } from "@/lib/error-handler"
 import type { Event, Registration } from "@/types"
 
 export async function POST(request: Request) {
@@ -77,6 +78,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Registration successful", registration })
   } catch (error) {
     console.error("[v0] Event registration error:", error)
-    return NextResponse.json({ message: "Failed to register" }, { status: 500 })
+    const errorMessage = getErrorMessage(error)
+    const status = getErrorStatus(error)
+    return NextResponse.json({ message: errorMessage }, { status })
   }
 }

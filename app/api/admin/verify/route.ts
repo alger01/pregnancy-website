@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { getAuthUser } from "@/lib/auth"
+import { getErrorMessage, getErrorStatus } from "@/lib/error-handler"
 
 export async function GET() {
   try {
@@ -14,6 +15,9 @@ export async function GET() {
       user,
     })
   } catch (error) {
-    return NextResponse.json({ authenticated: false }, { status: 401 })
+    console.error("[v0] Verify auth error:", error)
+    const errorMessage = getErrorMessage(error)
+    const status = getErrorStatus(error)
+    return NextResponse.json({ authenticated: false, message: errorMessage }, { status })
   }
 }

@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useToast } from "@/hooks/use-toast"
+import { handleApiError } from "@/lib/api-client"
 import type { Event } from "@/types"
 
 interface EventFormProps {
@@ -48,7 +49,10 @@ export function EventForm({ event, onSuccess }: EventFormProps) {
         }),
       })
 
-      if (!response.ok) throw new Error("Failed to save event")
+      if (!response.ok) {
+        const errorMessage = await handleApiError(null, response)
+        throw new Error(errorMessage)
+      }
 
       toast({
         title: "Sukses",
@@ -57,9 +61,10 @@ export function EventForm({ event, onSuccess }: EventFormProps) {
 
       onSuccess()
     } catch (error) {
+      const errorMessage = await handleApiError(error)
       toast({
         title: "Gabim",
-        description: "Ndodhi një gabim. Ju lutem provoni përsëri.",
+        description: errorMessage,
         variant: "destructive",
       })
     } finally {

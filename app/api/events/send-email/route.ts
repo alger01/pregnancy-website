@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server"
 import nodemailer from "nodemailer"
+import { getErrorMessage, getErrorStatus } from "@/lib/error-handler"
 
 export async function POST(request: Request) {
   try {
-    console.log("erdhi")
     const body = await request.json()
     const { type, data } = body
 
@@ -58,13 +58,14 @@ export async function POST(request: Request) {
       // Send email
       await transporter.sendMail(emailContent)
 
-      console.log("[v0] Email sent to:", ADMIN_EMAIL)
       return NextResponse.json({ message: "Email sent successfully" })
     }
 
     return NextResponse.json({ message: "Unknown email type" }, { status: 400 })
   } catch (error) {
     console.error("[v0] Send email error:", error)
-    return NextResponse.json({ message: "Failed to send email" }, { status: 500 })
+    const errorMessage = getErrorMessage(error)
+    const status = getErrorStatus(error)
+    return NextResponse.json({ message: errorMessage }, { status })
   }
 }

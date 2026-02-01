@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useToast } from "@/hooks/use-toast"
+import { handleApiError } from "@/lib/api-client"
 import type { Article } from "@/types"
 
 interface ArticleFormProps {
@@ -43,7 +44,10 @@ export function ArticleForm({ article, onSuccess }: ArticleFormProps) {
         body: JSON.stringify(formData),
       })
 
-      if (!response.ok) throw new Error("Failed to save article")
+      if (!response.ok) {
+        const errorMessage = await handleApiError(null, response)
+        throw new Error(errorMessage)
+      }
 
       toast({
         title: "Sukses",
@@ -52,9 +56,10 @@ export function ArticleForm({ article, onSuccess }: ArticleFormProps) {
 
       onSuccess()
     } catch (error) {
+      const errorMessage = await handleApiError(error)
       toast({
         title: "Gabim",
-        description: "Ndodhi një gabim. Ju lutem provoni përsëri.",
+        description: errorMessage,
         variant: "destructive",
       })
     } finally {

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { readData } from "@/lib/file-storage"
+import { getErrorMessage, getErrorStatus } from "@/lib/error-handler"
 import type { Event } from "@/types"
 
 export async function GET() {
@@ -7,6 +8,9 @@ export async function GET() {
     const events = await readData<Event>("events.json")
     return NextResponse.json(events)
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch events" }, { status: 500 })
+    console.error("[v0] Fetch events error:", error)
+    const errorMessage = getErrorMessage(error)
+    const status = getErrorStatus(error)
+    return NextResponse.json({ message: errorMessage }, { status })
   }
 }
