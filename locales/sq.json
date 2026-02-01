@@ -1,0 +1,192 @@
+{
+  "common": {
+    "brandName": "Nën'Harmoni",
+    "nav": {
+      "home": "Home",
+      "about": "Rreth Nesh",
+      "services": "Shërbimet",
+      "team": "Ekipi",
+      "events": "Evente",
+      "blog": "Blog",
+      "contact": "Na Kontaktoni"
+    },
+    "footer": {
+      "tagline": "Mbështetje profesionale për femrat para dhe pas shtatzënisë.",
+      "navigation": "Navigimi",
+      "resources": "Resurse",
+      "contact": "Kontakti",
+      "blogAndEducation": "Blog & Edukim",
+      "allRightsReserved": "Të gjitha të drejtat e rezervuara.",
+      "address": "Tiranë, Shqipëri"
+    }
+  },
+  "metadata": {
+    "title": "Nën'Harmoni - Mbështetje për Shtatzëninë",
+    "description": "Edukim, mbështetje emocionale dhe evente për femrat para dhe pas shtatzënisë"
+  },
+  "home": {
+    "hero": {
+      "title": "Udhëtimi juaj drejt mëmësisë, me mbështetjen tonë",
+      "subtitle": "Ofrojmë edukim profesional, mbështetje emocionale dhe një komunitet të ngrohtë për çdo grua para dhe pas shtatzënisë.",
+      "ctaBook": "Rezervo Konsultë",
+      "ctaAbout": "Njihuni me Ne"
+    },
+    "services": {
+      "title": "Shërbimet Tona",
+      "subtitle": "Mbështetje e plotë për të gjitha fazat e udhëtimit tuaj drejt mëmësisë",
+      "prenatal": {
+        "title": "Kujdes Prenatal",
+        "description": "Monitorim dhe edukim gjatë shtatzënisë për një përvojë të qetë"
+      },
+      "postnatal": {
+        "title": "Mbështetje Postnatale",
+        "description": "Shoqërim pas lindjes për ju dhe foshnjën tuaj"
+      },
+      "workshops": {
+        "title": "Edukim & Workshop",
+        "description": "Sesione edukative dhe evente për prindër të ardhshëm"
+      },
+      "viewAll": "Shiko të gjitha shërbimet"
+    },
+    "events": {
+      "title": "Evente të Ardhshme",
+      "subtitle": "Bashkohuni me ne në sesionet tona edukative",
+      "all": "Të gjitha",
+      "register": "Regjistrohu"
+    },
+    "blog": {
+      "title": "Blog & Edukim",
+      "subtitle": "Këshilla dhe informacion për ju",
+      "allArticles": "Të gjithë artikujt",
+      "readMore": "Lexo më shumë"
+    },
+    "contactCta": {
+      "title": "Jeni gati të filloni?",
+      "subtitle": "Na kontaktoni për të rezervuar një konsultë ose për më shumë informacion",
+      "phone": "Telefon",
+      "email": "Email",
+      "bookConsultation": "Rezervo Konsultë Tani"
+    }
+  },
+  "about": {
+    "title": "Rreth Nën'Harmoni",
+    "intro": "Ne jemi një ekip i dedikuar profesionistësh që ofrojnë mbështetje të plotë për femrat para dhe pas shtatzënisë. Misioni ynë është të krijojmë një ambient të sigurt, të ngrohtë dhe gjithëpërfshirës ku çdo grua mund të marrë informacionin dhe mbështetjen që i nevojitet.",
+    "videoPlaceholder": "Video Prezantues",
+    "valuesTitle": "Vlerat Tona",
+    "values": {
+      "empathy": {
+        "title": "Empati & Kujdes",
+        "description": "Çdo grua meriton të ndihet e dëgjuar dhe e mbështetur në këtë udhëtim të veçantë."
+      },
+      "community": {
+        "title": "Komunitet",
+        "description": "Krijojmë një hapësirë bashkëpunimi dhe mbështetjeje midis nënave dhe familjeve."
+      },
+      "professionalism": {
+        "title": "Profesionalizëm",
+        "description": "Ofrojmë shërbime të bazuara në praktikat më të mira dhe hulumtimet më të fundit."
+      },
+      "inclusive": {
+        "title": "Qasje Gjithëpërfshirëse",
+        "description": "Mirëpresim dhe mbështesim të gjitha familjet, pavarësisht nga origjina apo situata."
+      }
+    },
+    "missionTitle": "Misioni Ynë",
+    "mission": "Të ofrojmë edukim të bazuar në evidenca, mbështetje emocionale dhe një komunitet të ngrohtë për çdo grua dhe familje që përballet me sfidat dhe gëzimet e shtatzënisë dhe mëmësisë së re. Ne besojmë se çdo prind meriton të ketë akses në informacion cilësor dhe në një rrjet mbështetës që e shoqëron gjatë gjithë udhëtimit."
+  },
+  "contact": {
+    "title": "Na Kontaktoni",
+    "subtitle": "Na dërgoni mesazhin tuaj dhe ne do t'ju kontaktojmë sa më shpejt të jetë e mundur.",
+    "address": "Adresa",
+    "phone": "Telefoni",
+    "email": "Email"
+  },
+  "services": {
+    "title": "Shërbimet Tona",
+    "subtitle": "Mbështetje e plotë dhe profesionale për çdo fazë të udhëtimit tuaj drejt mëmësisë",
+    "ctaTitle": "Interesuar për shërbimet tona?",
+    "ctaSubtitle": "Kontaktoni ekipin tonë për të diskutuar se si mund t'ju ndihmojmë",
+    "ctaButton": "Rezervo një Konsultë",
+    "items": {
+      "prenatal": {
+        "title": "Kujdes Prenatal",
+        "description": "Monitorim dhe mbështetje gjatë shtatzënisë",
+        "details": ["Vizita të rregullta prenatale", "Monitorim i shëndetit të nënës dhe foshnjës", "Plane ushqyese dhe stili i jetesës", "Përgatitje për lindje"]
+      },
+      "postnatal": {
+        "title": "Mbështetje Postnatale",
+        "description": "Kujdes pas lindjes për nënën dhe foshnjën",
+        "details": ["Mbështetje për ushqyerjen me gji", "Këshilla për kujdesin e foshnjës", "Monitorim i shëndetit postnatal", "Mbështetje për depresionin postnatal"]
+      },
+      "individual": {
+        "title": "Konsulta Individuale",
+        "description": "Sesione private me ekspertët tanë",
+        "details": ["Konsulta një-për-një me obstetrikë", "Mbështetje psikologjike", "Plane të personalizuara të kujdesit", "Këshilla ushqyese specifike"]
+      },
+      "workshops": {
+        "title": "Workshop & Evente",
+        "description": "Sesione edukative grupore",
+        "details": ["Klasa përgatitjeje për lindje", "Workshop për kujdesin e foshnjës", "Sesione yoga për shtatzëna", "Grupe mbështetëse për prindër"]
+      },
+      "couple": {
+        "title": "Mbështetje për Çiftin",
+        "description": "Sesione për prindërit e ardhshëm",
+        "details": ["Përgatitje e partnerit për lindje", "Komunikim efektiv si prindër", "Menaxhim i stresit familjar", "Planifikim i roleve prindërore"]
+      },
+      "online": {
+        "title": "Konsulta Online",
+        "description": "Shërbime virtuale nga shtëpia",
+        "details": ["Video konsulta me specialistë", "Monitorim i largët i shtatzënisë", "Mbështetje 24/7 online", "Resurse edukative digitale"]
+      }
+    }
+  },
+  "team": {
+    "title": "Ekipi Ynë",
+    "subtitle": "Njihuni me profesionistët e dedikuar që punojnë çdo ditë për të mbështetur udhëtimin tuaj",
+    "members": [
+      { "name": "Dr. Elena Krasniqi", "role": "Obstetrike & Gjinekologë", "bio": "Me 15 vjet përvojë në mjekësinë perinatale, Dr. Krasniqi specializohet në shtatzëni me risk të lartë dhe kujdes të personalizuar." },
+      { "name": "Arta Hoxha", "role": "Mamia & Konsulente Gjinore", "bio": "Arta ka mbështetur qindra familje përmes procesit të lindjes dhe periudhës postnatale me dashuri dhe ekspertizë." },
+      { "name": "Dr. Klara Berisha", "role": "Psikologë Perinatale", "bio": "Specializuar në shëndetin mendor perinatal, Dr. Berisha ofron mbështetje për çështje emocionale dhe psikologjike." },
+      { "name": "Luana Shala", "role": "Dietiste & Nutricioniste", "bio": "Luana krijon plane ushqyese të personalizuara për shtatzëna dhe nëna të reja për të mbështetur shëndetin optimal." },
+      { "name": "Dorina Meta", "role": "Infermiere Pediatrike", "bio": "Me pasion për kujdesin e foshnjave, Dorina ndihmon prindërit e rinj të lundrojnë muajt e parë me bebet e tyre." },
+      { "name": "Fjona Dervishi", "role": "Instruktore Yoga Prenatale", "bio": "Fjona kombinon ekspertizën e saj në yoga me njohuritë për shtatzëninë për të krijuar sesione të sigurta dhe rilaksuese." }
+    ]
+  },
+  "events": {
+    "title": "Evente & Workshop",
+    "subtitle": "Bashkohuni me komunitetin tonë në sesione edukative dhe ngjarje të veçanta",
+    "noEvents": "Nuk ka evente të ardhshme në këtë moment.",
+    "register": "Regjistrohu",
+    "registerModalTitle": "Regjistrohu për Eventin",
+    "online": "Online",
+    "onsite": "Onsite",
+    "onlineVideoCall": "Online Video Call",
+    "addressTbc": "Adresa do të konfirmohet"
+  },
+  "articles": {
+    "title": "Blog & Edukim",
+    "subtitle": "Informacion i bazuar në evidenca shkencore për të mbështetur udhëtimin tuaj",
+    "noArticles": "Nuk ka artikuj të disponueshëm në këtë moment.",
+    "readMore": "Lexo më shumë"
+  },
+  "contactForm": {
+    "modalTitle": "Rezervo Konsultë",
+    "date": "Data",
+    "time": "Ora",
+    "location": "Lokacioni",
+    "fullName": "Emri i plotë",
+    "fullNamePlaceholder": "Emri juaj",
+    "email": "Email",
+    "phone": "Telefoni",
+    "message": "Mesazhi",
+    "messagePlaceholder": "Shkruani mesazhin tuaj këtu...",
+    "sending": "Duke dërguar...",
+    "submit": "Dërgo Mesazhin",
+    "submitRegister": "Regjistrohu",
+    "successTitle": "Sukses",
+    "successMessage": "Mesazhi juaj u dërgua me sukses! Do t'ju kontaktojmë së shpejti.",
+    "successRegister": "Regjistrimi juaj u dërgua me sukses!",
+    "errorTitle": "Gabim",
+    "closeModal": "Mbyll"
+  }
+}

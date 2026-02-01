@@ -6,6 +6,7 @@ import { Calendar, MapPin, Clock, Video } from "lucide-react"
 import { Pagination } from "@/components/pagination"
 import { Modal } from "@/components/modal"
 import { ContactForm } from "@/components/contact-form"
+import { useTranslations } from "@/components/language-provider"
 import type { Event } from "@/types"
 import { useSearchParams } from "next/navigation"
 
@@ -60,19 +61,20 @@ export default function EventsPage() {
     setSelectedEvent(null)
   }
 
+  const { t, locale } = useTranslations()
+  const dateLocale = locale === "sq" ? "sq-AL" : "en"
+
   return (
     <main className="py-16">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Evente & Workshop</h1>
-          <p className="text-lg text-muted-foreground">
-            Bashkohuni me komunitetin tonë në sesione edukative dhe ngjarje të veçanta
-          </p>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">{t("events.title")}</h1>
+          <p className="text-lg text-muted-foreground">{t("events.subtitle")}</p>
         </div>
 
         {displayedEvents.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Nuk ka evente të ardhshme në këtë moment.</p>
+            <p className="text-muted-foreground">{t("events.noEvents")}</p>
           </div>
         ) : (
           <>
@@ -104,7 +106,7 @@ export default function EventsPage() {
                     <CardHeader className="flex-grow">
                       <div className="flex items-center gap-2 mb-3">
                         <span className={`px-3 py-1 rounded-full text-xs font-medium ${themeBg} ${themeText}`}>
-                          {event.location === "online" ? "Online" : "Onsite"}
+                          {event.location === "online" ? t("events.online") : t("events.onsite")}
                         </span>
                       </div>
                       <CardTitle className="text-xl mb-2">{event.title}</CardTitle>
@@ -113,7 +115,7 @@ export default function EventsPage() {
                     <CardContent className="space-y-3">
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Calendar className="h-4 w-4 flex-shrink-0" />
-                        <span>{new Date(event.date).toLocaleDateString("sq-AL")}</span>
+                        <span>{new Date(event.date).toLocaleDateString(dateLocale)}</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Clock className="h-4 w-4 flex-shrink-0" />
@@ -122,12 +124,12 @@ export default function EventsPage() {
                       {event.location === "online" ? (
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
                           <Video className="h-4 w-4 flex-shrink-0" />
-                          <span>Online Video Call</span>
+                          <span>{t("events.onlineVideoCall")}</span>
                         </div>
                       ) : (
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
                           <MapPin className="h-4 w-4 flex-shrink-0" />
-                          <span>{event.address || "Adresa do të konfirmohet"}</span>
+                          <span>{event.address || t("events.addressTbc")}</span>
                         </div>
                       )}
                       <button
@@ -135,7 +137,7 @@ export default function EventsPage() {
                         className={`w-full mt-4 px-4 py-2 rounded-md font-medium text-white transition-colors ${themeBg.replace("/10", "")} ${themeBtnHover}`}
                         style={{ backgroundColor: themeColor }}
                       >
-                        Regjistrohu
+                        {t("events.register")}
                       </button>
                     </CardContent>
                   </Card>
@@ -149,7 +151,7 @@ export default function EventsPage() {
       </div>
 
       {/* Registration Modal */}
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal} title="Regjistrohu për Eventin">
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal} title={t("events.registerModalTitle")}>
         {selectedEvent && <ContactForm event={selectedEvent} onSuccess={handleCloseModal} />}
       </Modal>
     </main>

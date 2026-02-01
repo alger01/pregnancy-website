@@ -4,9 +4,12 @@ import Link from "next/link"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { LanguageSwitcher } from "@/components/language-switcher"
+import { useTranslations } from "@/components/language-provider"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { t } = useTranslations()
 
   return (
     <>
@@ -18,30 +21,31 @@ export function Header() {
                 <div className="w-3 h-3 rounded-full bg-[#b73b8f]" />
                 <div className="w-3 h-3 rounded-full bg-[#00adef]" />
               </div>
-              <span className="text-xl font-semibold">Nën'Harmoni</span>
+              <span className="text-xl font-semibold">{t("common.brandName")}</span>
             </Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-6">
               <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">
-                Home
+                {t("common.nav.home")}
               </Link>
               <Link href="/about" className="text-sm font-medium hover:text-primary transition-colors">
-                Rreth Nesh
+                {t("common.nav.about")}
               </Link>
               <Link href="/services" className="text-sm font-medium hover:text-primary transition-colors">
-                Shërbimet
+                {t("common.nav.services")}
               </Link>
               <Link href="/team" className="text-sm font-medium hover:text-primary transition-colors">
-                Ekipi
+                {t("common.nav.team")}
               </Link>
               <Link href="/events" className="text-sm font-medium hover:text-primary transition-colors">
-                Evente
+                {t("common.nav.events")}
               </Link>
               <Link href="/articles" className="text-sm font-medium hover:text-primary transition-colors">
-                Blog
+                {t("common.nav.blog")}
               </Link>
-              <Link href="/contact"><Button>Na Kontaktoni</Button></Link>
+              <LanguageSwitcher />
+              <Link href="/contact"><Button>{t("common.nav.contact")}</Button></Link>
             </nav>
 
             {/* Mobile Menu Button */}
@@ -58,44 +62,47 @@ export function Header() {
                 className="text-sm font-medium hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Home
+                {t("common.nav.home")}
               </Link>
               <Link
                 href="/about"
                 className="text-sm font-medium hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Rreth Nesh
+                {t("common.nav.about")}
               </Link>
               <Link
                 href="/services"
                 className="text-sm font-medium hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Shërbimet
+                {t("common.nav.services")}
               </Link>
               <Link
                 href="/team"
                 className="text-sm font-medium hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Ekipi
+                {t("common.nav.team")}
               </Link>
               <Link
                 href="/events"
                 className="text-sm font-medium hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Evente
+                {t("common.nav.events")}
               </Link>
               <Link
                 href="/articles"
                 className="text-sm font-medium hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Blog
+                {t("common.nav.blog")}
               </Link>
-              <Link href="/contact"><Button onClick={() => setIsMenuOpen(false)} className="w-full">Na Kontaktoni</Button></Link>
+              <div className="pt-2 border-t">
+                <LanguageSwitcher />
+              </div>
+              <Link href="/contact"><Button onClick={() => setIsMenuOpen(false)} className="w-full">{t("common.nav.contact")}</Button></Link>
             </nav>
           )}
         </div>

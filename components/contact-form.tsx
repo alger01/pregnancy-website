@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
 import { handleApiError } from "@/lib/api-client"
 import { Calendar, MapPin, Clock, Video } from "lucide-react"
+import { useTranslations } from "@/components/language-provider"
 import type { Event } from "@/types"
 
 interface ContactFormProps {
@@ -20,6 +21,8 @@ interface ContactFormProps {
 export function ContactForm({ event, onSuccess }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
+  const { t, locale } = useTranslations()
+  const dateLocale = locale === "sq" ? "sq-AL" : "en"
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -48,10 +51,8 @@ export function ContactForm({ event, onSuccess }: ContactFormProps) {
       }
 
       toast({
-        title: "Sukses",
-        description: event
-          ? "Regjistrimi juaj u dërgua me sukses!"
-          : "Mesazhi juaj u dërgua me sukses! Do t'ju kontaktojmë së shpejti.",
+        title: t("contactForm.successTitle"),
+        description: event ? t("contactForm.successRegister") : t("contactForm.successMessage"),
       })
 
       setFormData({ name: "", email: "", phone: "", message: "" })
@@ -59,7 +60,7 @@ export function ContactForm({ event, onSuccess }: ContactFormProps) {
     } catch (error) {
       const errorMessage = await handleApiError(error)
       toast({
-        title: "Gabim",
+        title: t("contactForm.errorTitle"),
         description: errorMessage,
         variant: "destructive",
       })
@@ -75,18 +76,18 @@ export function ContactForm({ event, onSuccess }: ContactFormProps) {
           className={`p-6 rounded-lg border-2 ${event.theme === "girl" ? "bg-[#b73b8f]/5 border-[#b73b8f]/20" : "bg-[#00adef]/5 border-[#00adef]/20"}`}
         >
           <h3 className="font-semibold text-lg mb-4">{event.title}</h3>
-          <div className="space-y-3 text-sm">
+            <div className="space-y-3 text-sm">
             <div className="flex items-start gap-3">
               <Calendar className="h-5 w-5 flex-shrink-0 mt-0.5 text-muted-foreground" />
               <div>
-                <p className="font-medium">Data</p>
-                <p className="text-muted-foreground">{new Date(event.date).toLocaleDateString("sq-AL")}</p>
+                <p className="font-medium">{t("contactForm.date")}</p>
+                <p className="text-muted-foreground">{new Date(event.date).toLocaleDateString(dateLocale)}</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <Clock className="h-5 w-5 flex-shrink-0 mt-0.5 text-muted-foreground" />
               <div>
-                <p className="font-medium">Ora</p>
+                <p className="font-medium">{t("contactForm.time")}</p>
                 <p className="text-muted-foreground">{event.time}</p>
               </div>
             </div>
@@ -97,9 +98,9 @@ export function ContactForm({ event, onSuccess }: ContactFormProps) {
                 <MapPin className="h-5 w-5 flex-shrink-0 mt-0.5 text-muted-foreground" />
               )}
               <div>
-                <p className="font-medium">Lokacioni</p>
+                <p className="font-medium">{t("contactForm.location")}</p>
                 <p className="text-muted-foreground">
-                  {event.location === "online" ? "Online Video Call" : event.address || "Adresa do të konfirmohet"}
+                  {event.location === "online" ? t("events.onlineVideoCall") : event.address || t("events.addressTbc")}
                 </p>
               </div>
             </div>
@@ -109,18 +110,18 @@ export function ContactForm({ event, onSuccess }: ContactFormProps) {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="name">Emri i plotë</Label>
+          <Label htmlFor="name">{t("contactForm.fullName")}</Label>
           <Input
             id="name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
-            placeholder="Emri juaj"
+            placeholder={t("contactForm.fullNamePlaceholder")}
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">{t("contactForm.email")}</Label>
           <Input
             id="email"
             type="email"
@@ -132,7 +133,7 @@ export function ContactForm({ event, onSuccess }: ContactFormProps) {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="phone">Telefoni</Label>
+          <Label htmlFor="phone">{t("contactForm.phone")}</Label>
           <Input
             id="phone"
             type="tel"
@@ -144,19 +145,19 @@ export function ContactForm({ event, onSuccess }: ContactFormProps) {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="message">Mesazhi</Label>
+          <Label htmlFor="message">{t("contactForm.message")}</Label>
           <Textarea
             id="message"
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
             required
             rows={4}
-            placeholder="Shkruani mesazhin tuaj këtu..."
+            placeholder={t("contactForm.messagePlaceholder")}
           />
         </div>
 
         <Button type="submit" disabled={isSubmitting} className="w-full">
-          {isSubmitting ? "Duke dërguar..." : event ? "Regjistrohu" : "Dërgo Mesazhin"}
+          {isSubmitting ? t("contactForm.sending") : event ? t("contactForm.submitRegister") : t("contactForm.submit")}
         </Button>
       </form>
     </div>

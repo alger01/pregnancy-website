@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Calendar, User, Tag } from "lucide-react"
 import { Pagination } from "@/components/pagination"
 import { Modal } from "@/components/modal"
+import { useTranslations } from "@/components/language-provider"
 import type { Article } from "@/types"
 import { useSearchParams } from "next/navigation"
 
@@ -58,19 +59,20 @@ export default function ArticlesPage() {
     setSelectedArticle(null)
   }
 
+  const { t, locale } = useTranslations()
+  const dateLocale = locale === "sq" ? "sq-AL" : "en"
+
   return (
     <main className="py-16">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Blog & Edukim</h1>
-          <p className="text-lg text-muted-foreground">
-            Informacion i bazuar në evidenca shkencore për të mbështetur udhëtimin tuaj
-          </p>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">{t("articles.title")}</h1>
+          <p className="text-lg text-muted-foreground">{t("articles.subtitle")}</p>
         </div>
 
         {displayedArticles.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Nuk ka artikuj të disponueshëm në këtë moment.</p>
+            <p className="text-muted-foreground">{t("articles.noArticles")}</p>
           </div>
         ) : (
           <>
@@ -106,7 +108,7 @@ export default function ArticlesPage() {
                           {article.category}
                         </span>
                         <span className="text-xs text-muted-foreground">
-                          {new Date(article.date).toLocaleDateString("sq-AL")}
+                          {new Date(article.date).toLocaleDateString(dateLocale)}
                         </span>
                       </div>
                       <CardTitle className="text-xl mb-2">{article.title}</CardTitle>
@@ -121,7 +123,7 @@ export default function ArticlesPage() {
                         onClick={() => handleReadMore(article)}
                         className={`w-full border-2 ${themeBtnBorder} ${themeText} bg-transparent ${themeBtnHover} hover:text-white transition-colors px-4 py-2 rounded-md font-medium`}
                       >
-                        Lexo më shumë
+                        {t("articles.readMore")}
                       </button>
                     </CardContent>
                   </Card>
@@ -155,7 +157,7 @@ export default function ArticlesPage() {
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
-                <span>{new Date(selectedArticle.date).toLocaleDateString("sq-AL")}</span>
+                <span>{new Date(selectedArticle.date).toLocaleDateString(dateLocale)}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Tag className="h-4 w-4" />
