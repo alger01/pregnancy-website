@@ -1,27 +1,5 @@
 [
   {
-    "id": "1766241356591",
-    "title": "provaq",
-    "description": "vjhknl",
-    "date": "2026-12-21",
-    "time": "17:35",
-    "location": "online",
-    "address": "",
-    "imageUrl": "",
-    "registrations": [
-      {
-        "id": "1767110298911",
-        "eventId": "1766241356591",
-        "name": "Alger Qesari",
-        "email": "alice@example.com",
-        "phone": "0699569040",
-        "message": "prov",
-        "registeredAt": "2025-12-30T15:58:18.911Z"
-      }
-    ],
-    "theme": "boy"
-  },
-  {
     "id": "17662413565919",
     "title": "provaq",
     "description": "vjhknl",
@@ -135,6 +113,27 @@
         "phone": "0699569040",
         "message": "afasfa",
         "registeredAt": "2025-12-20T18:11:37.370Z"
+      }
+    ]
+  },
+  {
+    "id": "1771007709110",
+    "title": "tewtdfssdf",
+    "description": "asfasdfs",
+    "date": "2026-02-21",
+    "time": "19:37",
+    "location": "onsite",
+    "address": "",
+    "imageUrl": "",
+    "registrations": [
+      {
+        "id": "1771007748867",
+        "eventId": "1771007709110",
+        "name": "asfasdf",
+        "email": "ggeri629@gmail.com",
+        "phone": "ghvjbkln",
+        "message": "vghvk",
+        "registeredAt": "2026-02-13T18:35:48.867Z"
       }
     ]
   }
