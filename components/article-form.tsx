@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast"
 import { handleApiError } from "@/lib/api-client"
 import type { Article } from "@/types"
+import { Upload, X } from "lucide-react"
 
 interface ArticleFormProps {
   article: Article | null
@@ -19,6 +20,8 @@ interface ArticleFormProps {
 
 export function ArticleForm({ article, onSuccess }: ArticleFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isUploading, setIsUploading] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const { toast } = useToast()
   const [formData, setFormData] = useState({
     title: article?.title || "",
@@ -29,6 +32,51 @@ export function ArticleForm({ article, onSuccess }: ArticleFormProps) {
     imageUrl: article?.imageUrl || "",
     theme: article?.theme || "girl",
   })
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    if (!file.type.startsWith("image/")) {
+      toast({
+        title: "Gabim",
+        description: "Përdorni një skedar imazhi.",
+        variant: "destructive",
+      })
+      return
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: "Gabim",
+        description: "Imazhi duhet të jetë më i vogël se 5MB.",
+        variant: "destructive",
+      })
+      return
+    }
+
+    setIsUploading(true)
+    try {
+      const formDataUpload = new FormData()
+      formDataUpload.append("file", file)
+      const res = await fetch("/api/admin/upload", {
+        method: "POST",
+        body: formDataUpload,
+      })
+      if (!res.ok) {
+        const err = await res.json()
+        throw new Error(err.message || "Upload failed")
+      }
+      const { url } = await res.json()
+      setFormData((prev) => ({ ...prev, imageUrl: url }))
+      toast({ title: "Sukses", description: "Imazhi u ngarkua" })
+    } catch (error) {
+      const msg = await handleApiError(error)
+      toast({ title: "Gabim", description: msg, variant: "destructive" })
+    } finally {
+      setIsUploading(false)
+      e.target.value = ""
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -147,13 +195,45 @@ export function ArticleForm({ article, onSuccess }: ArticleFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="imageUrl">URL e Imazhit (opsionale)</Label>
-        <Input
-          id="imageUrl"
-          type="url"
-          value={formData.imageUrl}
-          onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-        />
+        <Label>Imazhi i Artikullit (blog)</Label>
+        <div className="space-y-3">
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={handleFileUpload}
+          />
+          <div className="flex flex-wrap items-center gap-3">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              disabled={isUploading}
+              onClick={() => fileInputRef.current?.click()}
+            >
+              <Upload className="h-4 w-4 mr-2" />
+              {isUploading ? "Duke ngarkuar..." : "Ngarko foto"}
+            </Button>
+          </div>
+          {formData.imageUrl ? (
+            <div className="relative inline-block">
+              <img
+                src={formData.imageUrl}
+                alt="Preview"
+                className="h-32 w-auto rounded-lg border object-cover"
+              />
+              <button
+                type="button"
+                onClick={() => setFormData({ ...formData, imageUrl: "" })}
+                className="absolute -top-2 -right-2 rounded-full bg-destructive p-1 text-destructive-foreground hover:bg-destructive/90"
+                aria-label="Hiq imazhin"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          ) : null}
+        </div>
       </div>
 
       <div className="flex gap-3 pt-4">

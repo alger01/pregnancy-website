@@ -62,13 +62,17 @@ export default function ServicesPage() {
         </div>
 
         {/* CTA Section */}
-        <div className="max-w-3xl mx-auto text-center bg-gradient-to-br from-[#b73b8f]/5 via-background to-[#00adef]/5 p-8 md:p-12 rounded-lg border">
-          <h2 className="text-3xl font-bold mb-4">{t("services.ctaTitle")}</h2>
-          <p className="text-lg text-muted-foreground mb-6">{t("services.ctaSubtitle")}</p>
-          <Button size="lg" asChild>
-            <Link href="/#contact">{t("services.ctaButton")}</Link>
-          </Button>
-        </div>
+        <Card className="max-w-3xl mx-auto overflow-hidden border-0 shadow-xl bg-gradient-to-br from-[#b73b8f]/10 via-white to-[#00adef]/10 dark:from-[#b73b8f]/15 dark:via-card dark:to-[#00adef]/15">
+          <div className="px-6 pt-8 pb-6 text-center border-b border-border/50 bg-white/50 dark:bg-white/5">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">{t("services.ctaTitle")}</h2>
+            <p className="text-base text-muted-foreground max-w-xl mx-auto">{t("services.ctaSubtitle")}</p>
+          </div>
+          <div className="px-6 py-8 flex justify-center">
+            <Button size="lg" variant="gradient" asChild>
+              <Link href="/#contact">{t("services.ctaButton")}</Link>
+            </Button>
+          </div>
+        </Card>
       </div>
     </main>
   )

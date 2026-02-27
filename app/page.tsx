@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Section } from "@/components/section"
 import { Calendar, Heart, Users, BookOpen, ArrowRight } from "lucide-react"
 import { Modal } from "@/components/modal"
 import { ContactForm } from "@/components/contact-form"
@@ -24,8 +25,8 @@ export default function HomePage({ events, articles }: HomePageProps) {
   return (
     <main>
       {/* Hero Section */}
-      <section className="relative py-20 md:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#b73b8f]/5 via-background to-[#00adef]/5" />
+      <Section variant="gradient" spacing="large" className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#b73b8f]/8 via-transparent to-[#00adef]/8" />
         <div className="container mx-auto px-4 relative">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance">
@@ -36,35 +37,35 @@ export default function HomePage({ events, articles }: HomePageProps) {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <ContactButton text={t("home.hero.ctaBook")} />
-              <Button size="lg" variant="outline" asChild className="text-lg bg-transparent">
+              <Button size="lg" variant="outline" asChild className="text-lg">
                 <Link href="/about">{t("home.hero.ctaAbout")}</Link>
               </Button>
             </div>
           </div>
 
           {/* Decorative illustration */}
-          <div className="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto opacity-60">
+          <div className="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto opacity-70">
             <div className="flex justify-center">
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#b73b8f]/20 to-[#b73b8f]/5 flex items-center justify-center">
+              <div className="w-24 h-24 rounded-2xl bg-white/80 shadow-md flex items-center justify-center">
                 <Heart className="w-12 h-12 text-[#b73b8f]" />
               </div>
             </div>
             <div className="flex justify-center">
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#00adef]/20 to-[#00adef]/5 flex items-center justify-center">
+              <div className="w-24 h-24 rounded-2xl bg-white/80 shadow-md flex items-center justify-center">
                 <Users className="w-12 h-12 text-[#00adef]" />
               </div>
             </div>
             <div className="flex justify-center">
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#b73b8f]/20 via-background to-[#00adef]/20 flex items-center justify-center">
+              <div className="w-24 h-24 rounded-2xl bg-white/80 shadow-md flex items-center justify-center">
                 <BookOpen className="w-12 h-12 text-primary" />
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* Services Preview */}
-      <section className="py-16 bg-muted/30">
+      <Section variant="lavender">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("home.services.title")}</h2>
@@ -74,9 +75,9 @@ export default function HomePage({ events, articles }: HomePageProps) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <Card className="border-2 hover:border-[#b73b8f]/30 transition-colors">
+            <Card className="bg-card/80 backdrop-blur-sm">
               <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-[#b73b8f]/10 flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-xl bg-[#b73b8f]/15 flex items-center justify-center mb-4">
                   <Heart className="w-6 h-6 text-[#b73b8f]" />
                 </div>
                 <CardTitle>{t("home.services.prenatal.title")}</CardTitle>
@@ -84,9 +85,9 @@ export default function HomePage({ events, articles }: HomePageProps) {
               </CardHeader>
             </Card>
 
-            <Card className="border-2 hover:border-[#00adef]/30 transition-colors">
+            <Card className="bg-card/80 backdrop-blur-sm">
               <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-[#00adef]/10 flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-xl bg-[#00adef]/15 flex items-center justify-center mb-4">
                   <Users className="w-6 h-6 text-[#00adef]" />
                 </div>
                 <CardTitle>{t("home.services.postnatal.title")}</CardTitle>
@@ -94,9 +95,9 @@ export default function HomePage({ events, articles }: HomePageProps) {
               </CardHeader>
             </Card>
 
-            <Card className="border-2 hover:border-primary/30 transition-colors">
+            <Card className="bg-card/80 backdrop-blur-sm">
               <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center mb-4">
                   <BookOpen className="w-6 h-6 text-primary" />
                 </div>
                 <CardTitle>{t("home.services.workshops.title")}</CardTitle>
@@ -105,26 +106,26 @@ export default function HomePage({ events, articles }: HomePageProps) {
             </Card>
           </div>
 
-          <div className="text-center mt-8">
-            <Button asChild variant="outline">
+          <div className="text-center mt-10">
+            <Button asChild variant="gradient">
               <Link href="/services">
                 {t("home.services.viewAll")} <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* Upcoming Events */}
       {upcomingEvents.length > 0 && (
-        <section className="py-16">
+        <Section variant="paleBlue">
           <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between mb-12">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-12">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-2">{t("home.events.title")}</h2>
                 <p className="text-muted-foreground">{t("home.events.subtitle")}</p>
               </div>
-              <Button asChild variant="ghost">
+              <Button asChild variant="outline" className="shrink-0">
                 <Link href="/events">
                   {t("home.events.all")} <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -133,9 +134,9 @@ export default function HomePage({ events, articles }: HomePageProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {upcomingEvents.map((event) => (
-                <Card key={event.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <Card key={event.id} className="overflow-hidden bg-card/90">
                   {event.imageUrl && (
-                    <div className="aspect-video w-full overflow-hidden bg-muted">
+                    <div className="aspect-video w-full overflow-hidden rounded-t-2xl bg-muted">
                       <img
                         src={event.imageUrl || "/placeholder.svg"}
                         alt={event.title}
@@ -154,7 +155,7 @@ export default function HomePage({ events, articles }: HomePageProps) {
                     <CardDescription className="line-clamp-2">{event.description}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Button asChild className="w-full">
+                    <Button asChild variant="gradient" className="w-full">
                       <Link href={`/events?register=${event.id}`}>{t("home.events.register")}</Link>
                     </Button>
                   </CardContent>
@@ -162,19 +163,19 @@ export default function HomePage({ events, articles }: HomePageProps) {
               ))}
             </div>
           </div>
-        </section>
+        </Section>
       )}
 
       {/* Latest Articles */}
       {latestArticles.length > 0 && (
-        <section className="py-16 bg-muted/30">
+        <Section variant="offWhite">
           <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between mb-12">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-12">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-2">{t("home.blog.title")}</h2>
                 <p className="text-muted-foreground">{t("home.blog.subtitle")}</p>
               </div>
-              <Button asChild variant="ghost">
+              <Button asChild variant="outline" className="shrink-0">
                 <Link href="/articles">
                   {t("home.blog.allArticles")} <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -183,9 +184,9 @@ export default function HomePage({ events, articles }: HomePageProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {latestArticles.map((article) => (
-                <Card key={article.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <Card key={article.id} className="overflow-hidden bg-card/90">
                   {article.imageUrl && (
-                    <div className="aspect-video w-full overflow-hidden bg-muted">
+                    <div className="aspect-video w-full overflow-hidden rounded-t-2xl bg-muted">
                       <img
                         src={article.imageUrl || "/placeholder.svg"}
                         alt={article.title}
@@ -195,14 +196,14 @@ export default function HomePage({ events, articles }: HomePageProps) {
                   )}
                   <CardHeader>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                      <span className="px-2 py-1 rounded-full bg-primary/10 text-primary">{article.category}</span>
+                      <span className="px-2 py-1 rounded-full bg-primary/15 text-primary text-xs font-medium">{article.category}</span>
                       <span>{new Date(article.date).toLocaleDateString(dateLocale)}</span>
                     </div>
                     <CardTitle className="text-xl">{article.title}</CardTitle>
                     <CardDescription className="line-clamp-2">{article.excerpt}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Button asChild variant="outline" className="w-full bg-transparent">
+                    <Button asChild variant="outline" className="w-full">
                       <Link href={`/articles?read=${article.id}`}>{t("home.blog.readMore")}</Link>
                     </Button>
                   </CardContent>
@@ -210,45 +211,51 @@ export default function HomePage({ events, articles }: HomePageProps) {
               ))}
             </div>
           </div>
-        </section>
+        </Section>
       )}
 
       {/* Contact CTA */}
-      <section id="contact" className="py-16">
+      <Section id="contact" variant="warm" spacing="large">
         <div className="container mx-auto px-4">
-          <Card className="border-2 bg-gradient-to-br from-[#b73b8f]/5 via-background to-[#00adef]/5">
-            <CardHeader className="text-center pb-8">
-              <CardTitle className="text-3xl md:text-4xl mb-4">{t("home.contactCta.title")}</CardTitle>
-              <CardDescription className="text-lg">
-                {t("home.contactCta.subtitle")}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
+          <Card className="max-w-3xl mx-auto overflow-hidden border-0 shadow-xl bg-gradient-to-br from-[#b73b8f]/10 via-white to-[#00adef]/10 dark:from-[#b73b8f]/15 dark:via-card dark:to-[#00adef]/15">
+            <div className="px-6 pt-8 pb-2 text-center border-b border-border/50 bg-white/50 dark:bg-white/5">
+              <CardHeader className="p-0">
+                <CardTitle className="text-3xl md:text-4xl mb-3 font-bold text-foreground">
+                  {t("home.contactCta.title")}
+                </CardTitle>
+                <CardDescription className="text-base text-muted-foreground max-w-xl mx-auto">
+                  {t("home.contactCta.subtitle")}
+                </CardDescription>
+              </CardHeader>
+            </div>
+            <CardContent className="pt-8 pb-8">
               <div className="max-w-md mx-auto space-y-4">
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-background border">
-                  <div className="w-12 h-12 rounded-full bg-[#b73b8f]/10 flex items-center justify-center flex-shrink-0">
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/80 dark:bg-white/10 shadow-sm border border-border/50">
+                  <div className="w-12 h-12 rounded-xl bg-[#b73b8f]/20 flex items-center justify-center flex-shrink-0">
                     <Heart className="w-6 h-6 text-[#b73b8f]" />
                   </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">{t("home.contactCta.phone")}</h3>
+                  <div className="text-left">
+                    <h3 className="font-semibold text-foreground mb-0.5">{t("home.contactCta.phone")}</h3>
                     <p className="text-sm text-muted-foreground">+355 69 123 4567</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-background border">
-                  <div className="w-12 h-12 rounded-full bg-[#00adef]/10 flex items-center justify-center flex-shrink-0">
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/80 dark:bg-white/10 shadow-sm border border-border/50">
+                  <div className="w-12 h-12 rounded-xl bg-[#00adef]/20 flex items-center justify-center flex-shrink-0">
                     <Users className="w-6 h-6 text-[#00adef]" />
                   </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">{t("home.contactCta.email")}</h3>
+                  <div className="text-left">
+                    <h3 className="font-semibold text-foreground mb-0.5">{t("home.contactCta.email")}</h3>
                     <p className="text-sm text-muted-foreground">info@nenharmoni.al</p>
                   </div>
                 </div>
-                <ContactButton text={t("home.contactCta.bookConsultation")} size="lg" />
+                <div className="pt-2 flex justify-center">
+                  <ContactButton text={t("home.contactCta.bookConsultation")} size="lg" />
+                </div>
               </div>
             </CardContent>
           </Card>
         </div>
-      </section>
+      </Section>
     </main>
   )
 }
@@ -259,7 +266,7 @@ function ContactButton({ text, size }: { text: string; size?: "default" | "lg" }
 
   return (
     <>
-      <Button size={size || "default"} className="w-full" onClick={() => setIsModalOpen(true)}>
+      <Button size={size || "default"} variant="gradient" className="w-full sm:w-auto" onClick={() => setIsModalOpen(true)}>
         {text}
       </Button>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={t("contactForm.modalTitle")}>
