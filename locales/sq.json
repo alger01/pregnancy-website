@@ -11,13 +11,13 @@
       "contact": "Na Kontaktoni"
     },
     "footer": {
-      "tagline": "Mbështetje profesionale për femrat para dhe pas shtatzënisë.",
+      "tagline": "Një standard i ri në kujdesin ndaj shtatëzanisë dhe prindërimit",
       "navigation": "Navigimi",
       "resources": "Resurse",
       "contact": "Kontakti",
       "blogAndEducation": "Blog & Edukim",
       "allRightsReserved": "Të gjitha të drejtat e rezervuara.",
-      "address": "Tiranë, Shqipëri"
+      "address": "Rruga Kongresi i Manastirit Tiranë, Shqipëri"
     }
   },
   "metadata": {
@@ -26,8 +26,8 @@
   },
   "home": {
     "hero": {
-      "title": "Udhëtimi juaj drejt mëmësisë, me mbështetjen tonë",
-      "subtitle": "Ofrojmë edukim profesional, mbështetje emocionale dhe një komunitet të ngrohtë për çdo grua para dhe pas shtatzënisë.",
+      "title": "Një standard i ri në kujdesin ndaj shtatëzanisë dhe prindërimit",
+      "subtitle": "Një qasje multidisiplinare që ndërthur fizioterapinë, maminë dhe psikologjinë  për një eksperiencë të personalizuar, të sigurt dhe të bazuar në evidencë.",
       "ctaBook": "Rezervo Konsultë",
       "ctaAbout": "Njihuni me Ne"
     },
@@ -70,7 +70,7 @@
   },
   "about": {
     "title": "Rreth Nën'Harmoni",
-    "intro": "Ne jemi një ekip i dedikuar profesionistësh që ofrojnë mbështetje të plotë për femrat para dhe pas shtatzënisë. Misioni ynë është të krijojmë një ambient të sigurt, të ngrohtë dhe gjithëpërfshirës ku çdo grua mund të marrë informacionin dhe mbështetjen që i nevojitet.",
+    "intro": "NënHarmoni është një hapësirë e dedikuar për kujdesin modern ndaj gruas, para dhe pas shtatzënisë. Ne ndërthurim ekspertizën në fizioterapi, mami dhe psikologji për të ofruar një qasje të integruar, të personalizuar dhe të bazuar në evidencë. Misioni ynë është të krijojmë një standard të ri kujdesi  ku çdo grua ndihet e informuar, e mbështetur dhe e sigurt në çdo fazë të mëmësisë.",
     "videoPlaceholder": "Video Prezantues",
     "valuesTitle": "Vlerat Tona",
     "values": {
@@ -92,7 +92,7 @@
       }
     },
     "missionTitle": "Misioni Ynë",
-    "mission": "Të ofrojmë edukim të bazuar në evidenca, mbështetje emocionale dhe një komunitet të ngrohtë për çdo grua dhe familje që përballet me sfidat dhe gëzimet e shtatzënisë dhe mëmësisë së re. Ne besojmë se çdo prind meriton të ketë akses në informacion cilësor dhe në një rrjet mbështetës që e shoqëron gjatë gjithë udhëtimit."
+    "mission": "Të krijojmë një eksperiencë ku çdo grua dhe familje e përjeton mëmësinë me më shumë qartësi, besim dhe qetësi  veçanërisht në momentet si ardhja e fëmijës së parë. Ne synojmë të lehtësojmë këtë tranzicion të ri, duke ndihmuar prindërit të kuptojnë ndryshimet fizike, emocionale dhe marrëdhënore që sjell kjo periudhë. Përmes kujdesit profesional dhe një ambienti të sigurt, ndihmojmë çdo n të ndihet e dëgjuar, e respektuar dhe e fuqizuar — duke krijuar një bazë të shëndetshme për të dhe familjen e saj."
   },
   "contact": {
     "title": "Na Kontaktoni",

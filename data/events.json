@@ -3,13 +3,26 @@
     "id": "17662413565919",
     "title": "provaq",
     "description": "vjhknl",
-    "date": "2025-12-21",
+    "date": "2026-04-16",
     "time": "17:35",
     "location": "online",
     "address": "",
     "imageUrl": "",
-    "registrations": [],
-    "theme": "boy"
+    "registrations": [
+      {
+        "id": "1773664956620",
+        "eventId": "17662413565919",
+        "name": " hj hj ",
+        "email": "jhvjhvjh@gmaul.com",
+        "phone": "56789",
+        "message": "gkbkbk",
+        "registeredAt": "2026-03-16T12:42:36.620Z"
+      }
+    ],
+    "theme": "boy",
+    "price": 100,
+    "discountUntil": "2026-03-03",
+    "discountPrice": 70
   },
   {
     "id": "17662413565918",

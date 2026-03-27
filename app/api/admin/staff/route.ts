@@ -2,45 +2,41 @@ import { NextResponse } from "next/server"
 import { readData, writeData } from "@/lib/file-storage"
 import { requireAuth } from "@/lib/auth"
 import { getErrorMessage, getErrorStatus } from "@/lib/error-handler"
-import type { Event } from "@/types"
+import type { StaffMember } from "@/types"
 
 export async function POST(request: Request) {
   try {
     await requireAuth()
 
     const body = await request.json()
-    const { title, description, date, time, location, address, imageUrl, capacity, price, discountPrice, discountUntil } = body
+    const { name, role, roleSq, bio, bioSq, email, imageUrl } = body
 
-    if (!title || !description || !date || !time || !location) {
+    if (!name || !role || !email) {
       return NextResponse.json({ message: "All required fields must be filled" }, { status: 400 })
     }
 
-    const events = await readData<Event>("events.json")
+    const staff = await readData<StaffMember>("staff.json")
 
-    const newEvent: Event = {
+    const newMember: StaffMember = {
       id: Date.now().toString(),
-      title,
-      description,
-      date,
-      time,
-      location,
-      address,
+      name,
+      role,
+      roleSq,
+      bio: bio || "",
+      bioSq: bioSq || "",
+      email,
       imageUrl,
-      capacity,
-      registrations: [],
-      price,
-      discountPrice,
-      discountUntil,
     }
 
-    events.push(newEvent)
-    await writeData("events.json", events)
+    staff.push(newMember)
+    await writeData("staff.json", staff)
 
-    return NextResponse.json(newEvent, { status: 201 })
+    return NextResponse.json(newMember, { status: 201 })
   } catch (error) {
-    console.error("[v0] Create event error:", error)
+    console.error("[v0] Create staff member error:", error)
     const errorMessage = getErrorMessage(error)
     const status = getErrorStatus(error)
     return NextResponse.json({ message: errorMessage }, { status })
   }
 }
+

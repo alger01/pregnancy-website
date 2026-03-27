@@ -10,6 +10,9 @@ export interface Event {
   capacity?: number
   registrations?: Registration[]
   theme?: "girl" | "boy"
+  price?: number
+  discountPrice?: number
+  discountUntil?: string
 }
 
 export interface Article {
@@ -39,4 +42,27 @@ export interface User {
   email: string
   password: string
   role: "admin"
+}
+
+export interface Service {
+  id: string
+  title: string
+  titleSq?: string
+  description: string
+  descriptionSq?: string
+  details: string[]
+  detailsSq?: string[]
+  icon?: "heart" | "baby" | "users" | "calendar" | "message" | "video"
+  color?: string
+}
+
+export interface StaffMember {
+  id: string
+  name: string
+  role: string
+  roleSq?: string
+  bio: string
+  bioSq?: string
+  email: string
+  imageUrl?: string
 }

@@ -12,6 +12,21 @@ import { useSearchParams } from "next/navigation"
 
 const ITEMS_PER_PAGE = 9
 
+function isDiscountActive(event: Event) {
+  if (typeof event.discountPrice !== "number") return false
+  if (!event.discountUntil) return true
+  const untilEnd = new Date(`${event.discountUntil}T23:59:59`)
+  return Date.now() <= untilEnd.getTime()
+}
+
+function formatEur(amount: number, locale: string) {
+  try {
+    return new Intl.NumberFormat(locale, { style: "currency", currency: "EUR" }).format(amount)
+  } catch {
+    return `€${amount.toFixed(2)}`
+  }
+}
+
 export default function EventsPage() {
   const [events, setEvents] = useState<Event[]>([])
   const [currentPage, setCurrentPage] = useState(1)
@@ -63,6 +78,7 @@ export default function EventsPage() {
 
   const { t, locale } = useTranslations()
   const dateLocale = locale === "sq" ? "sq-AL" : "en"
+  const moneyLocale = locale === "sq" ? "sq-AL" : "en"
 
   return (
     <main className="py-16">
@@ -97,7 +113,7 @@ export default function EventsPage() {
                         style={{ background: `linear-gradient(135deg, ${themeColor}15, ${themeColor}05)` }}
                       >
                         <img
-                          src={event.imageUrl || "/placeholder.svg"}
+                          src={event.imageUrl || "/logo_white.jpg"}
                           alt={event.title}
                           className="w-full h-full object-cover"
                         />
@@ -130,6 +146,24 @@ export default function EventsPage() {
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
                           <MapPin className="h-4 w-4 flex-shrink-0" />
                           <span>{event.address || t("events.addressTbc")}</span>
+                        </div>
+                      )}
+                      {typeof event.price === "number" && (
+                        <div className="pt-1">
+                          {isDiscountActive(event) ? (
+                            <div className="flex items-center gap-2">
+                              <span className="text-base text-muted-foreground line-through">
+                                {formatEur(event.price, moneyLocale)}
+                              </span>
+                              <span className="px-3 py-1.5 rounded-full text-sm font-bold bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">
+                                {formatEur(event.discountPrice as number, moneyLocale)}
+                              </span>
+                            </div>
+                          ) : (
+                            <div className="text-lg font-bold text-foreground">
+                              {formatEur(event.price, moneyLocale)}
+                            </div>
+                          )}
                         </div>
                       )}
                       <button

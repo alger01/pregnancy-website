@@ -84,24 +84,23 @@ export default function ArticlesPage() {
                 const themeBorder = article.theme === "boy" ? "border-[#00adef]" : "border-[#b73b8f]"
                 const themeBtnBorder = article.theme === "boy" ? "border-[#00adef]" : "border-[#b73b8f]"
                 const themeBtnHover = article.theme === "boy" ? "hover:bg-[#00adef]" : "hover:bg-[#b73b8f]"
-
+                const fallbackImage = article.theme === "boy" ? "/logo_blue.jpg" : "/logo_purple.jpg"
+                console.log(article.imageUrl)
                 return (
                   <Card
                     key={article.id}
                     className={`overflow-hidden border-2 ${themeBorder} hover:bg-white hover:shadow-lg transition-all flex flex-col group min-w-0`}
                   >
-                    {article.imageUrl && (
-                      <div
-                        className="aspect-video w-full min-h-0 overflow-hidden flex-shrink-0"
-                        style={{ background: `linear-gradient(135deg, ${themeColor}15, ${themeColor}05)` }}
-                      >
-                        <img
-                          src={article.imageUrl || "/placeholder.svg"}
-                          alt={article.title}
-                          className="w-full h-full object-cover max-w-full"
-                        />
-                      </div>
-                    )}
+                    <div
+                      className="aspect-video w-full min-h-0 overflow-hidden flex-shrink-0"
+                      style={{ background: `linear-gradient(135deg, ${themeColor}15, ${themeColor}05)` }}
+                    >
+                      <img
+                        src={article.imageUrl || fallbackImage}
+                        alt={article.title}
+                        className="w-full h-full object-cover max-w-full"
+                      />
+                    </div>
                     <CardHeader className="flex-grow min-w-0 overflow-hidden">
                       <div className="flex items-center gap-2 mb-3 flex-wrap">
                         <span className={`px-3 py-1 rounded-full text-xs font-medium break-words max-w-full ${themeBg} ${themeText}`}>
@@ -140,15 +139,13 @@ export default function ArticlesPage() {
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} title={selectedArticle?.title}>
         {selectedArticle && (
           <div className="space-y-6 min-w-0 overflow-hidden break-words">
-            {selectedArticle.imageUrl && (
-              <div className="aspect-video w-full max-w-full overflow-hidden rounded-lg bg-gradient-to-br from-[#b73b8f]/10 to-[#00adef]/10">
-                <img
-                  src={selectedArticle.imageUrl || "/placeholder.svg"}
-                  alt={selectedArticle.title}
-                  className="w-full h-full object-contain max-w-full"
-                />
-              </div>
-            )}
+            <div className="aspect-video w-full max-w-full overflow-hidden rounded-lg bg-gradient-to-br from-[#b73b8f]/10 to-[#00adef]/10">
+              <img
+                src={selectedArticle.imageUrl || (selectedArticle.theme === "boy" ? "/logo_blue.jpg" : "/logo_purple.jpg")}
+                alt={selectedArticle.title}
+                className="w-full h-full object-contain max-w-full"
+              />
+            </div>
 
             <div className="flex items-center gap-4 flex-wrap text-sm text-muted-foreground min-w-0">
               <div className="flex items-center gap-2 min-w-0">

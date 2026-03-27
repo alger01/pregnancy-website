@@ -8,7 +8,7 @@ export function FloatingContact() {
   return (
     <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
       <Link
-        href="https://wa.me/355691234567"
+        href="https://wa.me/355696234090"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="WhatsApp"

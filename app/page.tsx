@@ -1,26 +1,46 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import Image from "next/image"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Section } from "@/components/section"
-import { Calendar, Heart, Users, BookOpen, ArrowRight } from "lucide-react"
+import { Calendar, Heart, Users, BookOpen, ArrowRight, Baby, MessageCircle, Video } from "lucide-react"
 import { Modal } from "@/components/modal"
 import { ContactForm } from "@/components/contact-form"
 import { useTranslations } from "@/components/language-provider"
-import type { Event, Article } from "@/types"
+import type { Event, Article, Service } from "@/types"
 
 interface HomePageProps {
   events: Event[]
   articles: Article[]
 }
 
+const ICON_MAP: Record<NonNullable<Service["icon"]>, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
+  heart: Heart,
+  baby: Baby,
+  users: Users,
+  calendar: Calendar,
+  message: MessageCircle,
+  video: Video,
+}
+
 export default function HomePage({ events, articles }: HomePageProps) {
   const { t, locale } = useTranslations()
   const upcomingEvents = (events ?? []).filter((event) => new Date(event.date) >= new Date()).slice(0, 3)
   const latestArticles = (articles ?? []).slice(0, 3)
+  const [services, setServices] = useState<Service[]>([])
   const dateLocale = locale === "sq" ? "sq-AL" : "en"
+
+  useEffect(() => {
+    fetch("/api/services")
+      .then((res) => res.json())
+      .then((data: Service[]) => setServices(data))
+      .catch((error) => {
+        console.error("Error loading services:", error)
+      })
+  }, [])
 
   return (
     <main>
@@ -29,7 +49,18 @@ export default function HomePage({ events, articles }: HomePageProps) {
         <div className="absolute inset-0 bg-gradient-to-br from-[#b73b8f]/8 via-transparent to-[#00adef]/8" />
         <div className="container mx-auto px-4 relative">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance">
+            {/* Logo above title, centered, close together */}
+            <div className="mb-2">
+              <Image
+                src="/logo_white_png.png"
+                alt="Nën'armoni"
+                width={180}
+                height={100}
+                className="h-16 md:h-40 w-auto object-contain mx-auto"
+                priority
+              />
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold text-balance text-center leading-tight mb-6">
               {t("home.hero.title")}
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 text-pretty">
@@ -75,35 +106,24 @@ export default function HomePage({ events, articles }: HomePageProps) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <Card className="bg-card/80 backdrop-blur-sm">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-xl bg-[#b73b8f]/15 flex items-center justify-center mb-4">
-                  <Heart className="w-6 h-6 text-[#b73b8f]" />
-                </div>
-                <CardTitle>{t("home.services.prenatal.title")}</CardTitle>
-                <CardDescription>{t("home.services.prenatal.description")}</CardDescription>
-              </CardHeader>
-            </Card>
+            {services.slice(0, 3).map((service) => {
+              const Icon = (service.icon && ICON_MAP[service.icon]) || Heart
+              const color = service.color || "#b73b8f"
+              const title = locale === "sq" ? service.titleSq || service.title : service.title
+              const description = locale === "sq" ? service.descriptionSq || service.description : service.description
 
-            <Card className="bg-card/80 backdrop-blur-sm">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-xl bg-[#00adef]/15 flex items-center justify-center mb-4">
-                  <Users className="w-6 h-6 text-[#00adef]" />
-                </div>
-                <CardTitle>{t("home.services.postnatal.title")}</CardTitle>
-                <CardDescription>{t("home.services.postnatal.description")}</CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="bg-card/80 backdrop-blur-sm">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center mb-4">
-                  <BookOpen className="w-6 h-6 text-primary" />
-                </div>
-                <CardTitle>{t("home.services.workshops.title")}</CardTitle>
-                <CardDescription>{t("home.services.workshops.description")}</CardDescription>
-              </CardHeader>
-            </Card>
+              return (
+                <Card key={service.id} className="bg-card/80 backdrop-blur-sm">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: `${color}20` }}>
+                      <Icon className="w-6 h-6" style={{ color }} />
+                    </div>
+                    <CardTitle>{title}</CardTitle>
+                    <CardDescription>{description}</CardDescription>
+                  </CardHeader>
+                </Card>
+              )
+            })}
           </div>
 
           <div className="text-center mt-10">
@@ -138,7 +158,7 @@ export default function HomePage({ events, articles }: HomePageProps) {
                   {event.imageUrl && (
                     <div className="aspect-video w-full overflow-hidden rounded-t-2xl bg-muted">
                       <img
-                        src={event.imageUrl || "/placeholder.svg"}
+                        src={event.imageUrl || "/logo_white.svg"}
                         alt={event.title}
                         className="w-full h-full object-cover"
                       />
@@ -185,15 +205,13 @@ export default function HomePage({ events, articles }: HomePageProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {latestArticles.map((article) => (
                 <Card key={article.id} className="overflow-hidden bg-card/90">
-                  {article.imageUrl && (
-                    <div className="aspect-video w-full overflow-hidden rounded-t-2xl bg-muted">
-                      <img
-                        src={article.imageUrl || "/placeholder.svg"}
-                        alt={article.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  )}
+                  <div className="aspect-video w-full overflow-hidden rounded-t-2xl bg-muted">
+                    <img
+                      src={article.imageUrl || (article.theme === "boy" ? "/logo_blue.jpg" : "/logo_purple.jpg")}
+                      alt={article.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                   <CardHeader>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                       <span className="px-2 py-1 rounded-full bg-primary/15 text-primary text-xs font-medium">{article.category}</span>
@@ -236,7 +254,7 @@ export default function HomePage({ events, articles }: HomePageProps) {
                   </div>
                   <div className="text-left">
                     <h3 className="font-semibold text-foreground mb-0.5">{t("home.contactCta.phone")}</h3>
-                    <p className="text-sm text-muted-foreground">+355 69 123 4567</p>
+                    <p className="text-sm text-muted-foreground">+355 69 623 4090</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 p-4 rounded-xl bg-white/80 dark:bg-white/10 shadow-sm border border-border/50">
@@ -245,7 +263,7 @@ export default function HomePage({ events, articles }: HomePageProps) {
                   </div>
                   <div className="text-left">
                     <h3 className="font-semibold text-foreground mb-0.5">{t("home.contactCta.email")}</h3>
-                    <p className="text-sm text-muted-foreground">info@nenharmoni.al</p>
+                    <p className="text-sm text-muted-foreground">nenharmoni@outlook.com</p>
                   </div>
                 </div>
                 <div className="pt-2 flex justify-center">

@@ -1,28 +1,34 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Heart, Baby, Users, Calendar, Video, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { useLanguage } from "@/components/language-provider"
+import type { Service } from "@/types"
 
-const SERVICE_KEYS = ["prenatal", "postnatal", "individual", "workshops", "couple", "online"] as const
-const ICONS = [Heart, Baby, Users, Calendar, MessageCircle, Video]
-const COLORS = ["#b73b8f", "#00adef", "#b73b8f", "#00adef", "#b73b8f", "#00adef"]
+const ICON_MAP: Record<NonNullable<Service["icon"]>, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
+  heart: Heart,
+  baby: Baby,
+  users: Users,
+  calendar: Calendar,
+  message: MessageCircle,
+  video: Video,
+}
 
 export default function ServicesPage() {
-  const { t, messages } = useLanguage()
-  const items = (messages as Record<string, unknown>)?.services?.items as Record<string, { title: string; description: string; details: string[] }> | undefined
-  const servicesWithDetails = SERVICE_KEYS.map((key, index) => {
-    const item = items?.[key]
-    return {
-      icon: ICONS[index],
-      color: COLORS[index],
-      title: item?.title ?? t(`services.items.${key}.title`),
-      description: item?.description ?? t(`services.items.${key}.description`),
-      details: item?.details ?? [],
-    }
-  })
+  const { t, locale } = useLanguage()
+  const [services, setServices] = useState<Service[]>([])
+
+  useEffect(() => {
+    fetch("/api/services")
+      .then((res) => res.json())
+      .then((data: Service[]) => setServices(data))
+      .catch((error) => {
+        console.error("Error loading services:", error)
+      })
+  }, [])
 
   return (
     <main className="py-16">
@@ -34,22 +40,29 @@ export default function ServicesPage() {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {servicesWithDetails.map((service, index) => (
-            <Card key={index} className="border-2 hover:shadow-lg transition-all">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {services.map((service) => {
+            const Icon =
+              (service.icon && ICON_MAP[service.icon]) || Heart
+            const color = service.color || "#b73b8f"
+            const localizedTitle = locale === "sq" ? service.titleSq || service.title : service.title
+            const localizedDescription = locale === "sq" ? service.descriptionSq || service.description : service.description
+            const localizedDetails = locale === "sq" ? service.detailsSq || service.details : service.details
+            return (
+            <Card key={service.id} className="border-2 hover:shadow-lg transition-all">
               <CardHeader>
                 <div
                   className="w-14 h-14 rounded-lg flex items-center justify-center mb-4"
-                  style={{ backgroundColor: `${service.color}15` }}
+                  style={{ backgroundColor: `${color}15` }}
                 >
-                  <service.icon className="w-7 h-7" style={{ color: service.color }} />
+                  <Icon className="w-7 h-7" style={{ color }} />
                 </div>
-                <CardTitle className="text-xl">{service.title}</CardTitle>
-                <CardDescription>{service.description}</CardDescription>
+                <CardTitle className="text-xl">{localizedTitle}</CardTitle>
+                <CardDescription>{localizedDescription}</CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
-                  {service.details.map((detail, idx) => (
+                  {localizedDetails.map((detail, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
                       <span className="text-primary mt-1">•</span>
                       <span>{detail}</span>
@@ -58,7 +71,7 @@ export default function ServicesPage() {
                 </ul>
               </CardContent>
             </Card>
-          ))}
+          )})}
         </div>
 
         {/* CTA Section */}

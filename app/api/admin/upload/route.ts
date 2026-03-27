@@ -1,31 +1,18 @@
 import { NextResponse } from "next/server"
 import { writeFile, mkdir } from "fs/promises"
 import path from "path"
+import { randomUUID } from "crypto"
 import { requireAuth } from "@/lib/auth"
 import { getErrorMessage, getErrorStatus } from "@/lib/error-handler"
 
-function generateGuid(): string {
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
-    const r = (Math.random() * 16) | 0
-    const v = c === "x" ? r : (r & 0x3) | 0x8
-    return v.toString(16)
-  })
-}
-
-const UPLOAD_DIR = "public/uploads/blog"
+const UPLOAD_DIR = process.env.UPLOAD_DIR || "/var/www/uploads"
+const UPLOAD_PUBLIC_PREFIX = process.env.UPLOAD_PUBLIC_PREFIX || "/uploads"
 const MAX_SIZE = 5 * 1024 * 1024 // 5MB
 
 const MIME_TO_EXT: Record<string, string> = {
   "image/jpeg": ".jpg",
   "image/png": ".png",
-  "image/gif": ".gif",
   "image/webp": ".webp",
-  "image/svg+xml": ".svg",
-  "image/bmp": ".bmp",
-  "image/avif": ".avif",
-  "image/tiff": ".tiff",
-  "image/x-icon": ".ico",
-  "image/heic": ".heic",
 }
 
 export async function POST(request: Request) {
@@ -39,9 +26,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "No file provided" }, { status: 400 })
     }
 
-    if (!file.type.startsWith("image/")) {
+    if (!MIME_TO_EXT[file.type]) {
       return NextResponse.json(
-        { message: "Invalid file type. Only image files are allowed." },
+        { message: "Invalid file type. Only jpg, png, webp are allowed." },
         { status: 400 }
       )
     }
@@ -56,16 +43,15 @@ export async function POST(request: Request) {
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
 
-    const ext = MIME_TO_EXT[file.type] ?? (path.extname(file.name) || ".jpg")
-    const guid = generateGuid()
-    const filename = `${guid}${ext}`
-    const dir = path.join(process.cwd(), UPLOAD_DIR)
+    const ext = MIME_TO_EXT[file.type]
+    const filename = `${Date.now()}-${randomUUID()}${ext}`
+    const dir = path.resolve(UPLOAD_DIR)
     const filePath = path.join(dir, filename)
 
     await mkdir(dir, { recursive: true })
     await writeFile(filePath, buffer)
 
-    const url = `/uploads/blog/${filename}`
+    const url = `${UPLOAD_PUBLIC_PREFIX.replace(/\/$/, "")}/${filename}`
     return NextResponse.json({ url })
   } catch (error) {
     console.error("[upload] Error:", error)

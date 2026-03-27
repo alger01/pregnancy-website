@@ -17,12 +17,12 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-[var(--section-off-white)]/95 backdrop-blur-md shadow-sm">
+      <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-gradient-to-br from-[#b73b8f]/15 via-transparent to-[#00adef]/15 backdrop-blur-md shadow-sm">
         <div className="container mx-auto px-4">
           <div className="flex min-h-[4.5rem] items-center justify-between py-2">
             <Link href="/" className="flex items-center gap-2 shrink-0" aria-label={t("common.brandName")}>
               <Image
-                src="/logo_purple.jpg"
+                src="/logo_white_png.png"
                 alt={t("common.brandName")}
                 width={LOGO_WIDTH}
                 height={LOGO_HEIGHT}

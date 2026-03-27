@@ -24,23 +24,18 @@ export default function AboutPage() {
       <Section variant="offWhite">
         <div className="container mx-auto px-4">
         {/* Video Placeholder */}
-        <div className="max-w-4xl mx-auto">
-          <div className="aspect-video w-full rounded-2xl overflow-hidden bg-gradient-to-br from-[#b73b8f]/10 via-muted to-[#00adef]/10 flex items-center justify-center shadow-md">
-            <div className="text-center">
-              <div className="w-20 h-20 rounded-full bg-background/80 flex items-center justify-center mx-auto mb-4">
-                <svg
-                  className="w-10 h-10 text-primary"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
+          <div className="max-w-4xl mx-auto">
+            <div className="aspect-video w-full rounded-2xl overflow-hidden shadow-md">
+              <video
+                className="w-full h-full object-cover"
+                controls
+                autoPlay
                 >
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
-              <p className="text-muted-foreground">{t("about.videoPlaceholder")}</p>
+                <source src="/video_prezantuese.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
           </div>
-        </div>
 
         {/* Values */}
         <div className="max-w-5xl mx-auto">

@@ -19,7 +19,7 @@ export function Footer() {
           <div className="md:col-span-1">
             <Link href="/" className="inline-block mb-2" aria-label={t("common.brandName")}>
               <Image
-                src="/logo_white.jpg"
+                src="/logo_white_png.png"
                 alt={t("common.brandName")}
                 width={LOGO_WIDTH}
                 height={LOGO_HEIGHT}
@@ -81,11 +81,11 @@ export function Footer() {
             <ul className="space-y-1 text-sm text-white/80">
               <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4 shrink-0 text-white/70" />
-                <span>+355 69 123 4567</span>
+                <span>+355 69 623 4090</span>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4 shrink-0 text-white/70" />
-                <span>info@nenharmoni.al</span>
+                <span>nenharmoni@outlook.com</span>
               </li>
               <li className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 shrink-0 text-white/70" />
@@ -94,7 +94,7 @@ export function Footer() {
             </ul>
             <div className="flex gap-3 mt-2">
               <a
-                href="https://wa.me/355691234567"
+                href="https://wa.me/355696234090"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/70 hover:text-[#25D366] transition-colors"
@@ -103,22 +103,13 @@ export function Footer() {
                 <MessageCircle className="h-4 w-4" />
               </a>
               <a
-                href="https://instagram.com/nenharmoni.al"
+                href="https://instagram.com/nen_harmoni"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/70 hover:text-[#E4405F] transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="h-4 w-4" />
-              </a>
-              <a
-                href="https://facebook.com/nenharmoni.al"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/70 hover:text-[#1877F2] transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook className="h-4 w-4" />
               </a>
             </div>
           </div>
