@@ -15,14 +15,24 @@ export async function POST(request: Request) {
     const users = await readData<User>("users.json")
     const user = users.find((u) => u.email === email)
 
-    // For demo purposes, we're using a simple comparison
-    // In production, you would use bcrypt to compare hashed passwords
-    // Example: const isValid = await bcrypt.compare(password, user.password)
-    //if (!user || user.password !== password) {
-      //return NextResponse.json({ message: "Invalid email or password" }, { status: 401 })
-    //}
+    if (!user) {
+      return NextResponse.json({ message: "Invalid email or password" }, { status: 401 })
+    }
 
-    if (!user || user.role !== "admin") {
+    const bcrypt = await import("bcrypt").catch(() => null)
+    if (!bcrypt) {
+      return NextResponse.json(
+        { message: "bcrypt is not installed on the server. Please install bcrypt dependency." },
+        { status: 500 }
+      )
+    }
+
+    const isValidPassword = await bcrypt.compare(password, user.password)
+    if (!isValidPassword) {
+      return NextResponse.json({ message: "Invalid email or password" }, { status: 401 })
+    }
+
+    if (user.role !== "admin") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 403 })
     }
 
