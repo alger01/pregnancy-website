@@ -85,7 +85,6 @@ export default function ArticlesPage() {
                 const themeBtnBorder = article.theme === "boy" ? "border-[#00adef]" : "border-[#b73b8f]"
                 const themeBtnHover = article.theme === "boy" ? "hover:bg-[#00adef]" : "hover:bg-[#b73b8f]"
                 const fallbackImage = article.theme === "boy" ? "/logo_blue.jpg" : "/logo_purple.jpg"
-                console.log(article.imageUrl)
                 return (
                   <Card
                     key={article.id}
