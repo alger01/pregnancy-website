@@ -2,45 +2,42 @@ import { NextResponse } from "next/server"
 import { readData, writeData } from "@/lib/file-storage"
 import { requireAuth } from "@/lib/auth"
 import { getErrorMessage, getErrorStatus } from "@/lib/error-handler"
-import type { Event } from "@/types"
+import type { Service } from "@/types"
 
 export async function POST(request: Request) {
   try {
     await requireAuth()
 
     const body = await request.json()
-    const { title, description, date, time, location, address, imageUrl, capacity, price, discountPrice, discountUntil } = body
+    const { title, titleSq, description, descriptionSq, details, detailsSq, icon, color } = body
 
-    if (!title || !description || !date || !time || !location) {
+    if (!title || !description) {
       return NextResponse.json({ message: "All required fields must be filled" }, { status: 400 })
     }
 
-    const events = await readData<Event>("events.json")
+    const services = await readData<Service>("services.json")
 
-    const newEvent: Event = {
+    const newService: Service = {
       id: Date.now().toString(),
       title,
+      titleSq,
       description,
-      date,
-      time,
-      location,
-      address,
-      imageUrl,
-      capacity,
-      registrations: [],
-      price,
-      discountPrice,
-      discountUntil,
+      descriptionSq,
+      details: Array.isArray(details) ? details : [],
+      detailsSq: Array.isArray(detailsSq) ? detailsSq : [],
+      icon,
+      color,
     }
 
-    events.push(newEvent)
-    await writeData("events.json", events)
+    services.push(newService)
+    await writeData("services.json", services)
 
-    return NextResponse.json(newEvent, { status: 201 })
+    return NextResponse.json(newService, { status: 201 })
   } catch (error) {
-    console.error("[v0] Create event error:", error)
+    console.error("[v0] Create service error:", error)
     const errorMessage = getErrorMessage(error)
     const status = getErrorStatus(error)
     return NextResponse.json({ message: errorMessage }, { status })
   }
 }
+

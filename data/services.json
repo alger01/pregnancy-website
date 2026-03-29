@@ -1,0 +1,15 @@
+[
+  {
+    "id": "online",
+    "title": "Online Consultations",
+    "description": "Virtual services from home",
+    "details": [
+      "Video consultations with specialists",
+      "Remote pregnancy monitoring",
+      "24/7 online support",
+      "Digital educational resources"
+    ],
+    "icon": "video",
+    "color": "#00adef"
+  }
+]

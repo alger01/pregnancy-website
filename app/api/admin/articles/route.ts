@@ -9,13 +9,14 @@ export async function POST(request: Request) {
     await requireAuth()
 
     const body = await request.json()
-    const { title, content, excerpt, author, category, imageUrl } = body
+    const { title, content, excerpt, author, category, imageUrl, theme } = body
 
     if (!title || !content || !excerpt || !author || !category) {
       return NextResponse.json({ message: "All required fields must be filled" }, { status: 400 })
     }
 
     const articles = await readData<Article>("articles.json")
+    const fallbackImageUrl = theme === "boy" ? "/logo_blue.jpg" : "/logo_purple.jpg"
 
     const newArticle: Article = {
       id: Date.now().toString(),
@@ -24,7 +25,8 @@ export async function POST(request: Request) {
       excerpt,
       author,
       category,
-      imageUrl,
+      imageUrl: imageUrl || fallbackImageUrl,
+      theme,
       date: new Date().toISOString(),
     }
 

@@ -3,6 +3,13 @@ import { readData, writeData } from "@/lib/file-storage"
 import { getErrorMessage, getErrorStatus } from "@/lib/error-handler"
 import type { Event, Registration } from "@/types"
 
+function isDiscountActive(event: Event) {
+  if (typeof event.discountPrice !== "number") return false
+  if (!event.discountUntil) return true
+  const untilEnd = new Date(`${event.discountUntil}T23:59:59`)
+  return Date.now() <= untilEnd.getTime()
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json()
@@ -48,6 +55,7 @@ export async function POST(request: Request) {
 
     try {
       const event = events[eventIndex]
+      const discountActive = isDiscountActive(event)
       await fetch(`${request.url.split("/api")[0]}/api/events/send-email`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -60,6 +68,9 @@ export async function POST(request: Request) {
               time: event.time,
               location: event.location,
               address: event.address,
+              price: event.price,
+              discountPrice: event.discountPrice,
+              discountActive,
             },
             registration: {
               name,

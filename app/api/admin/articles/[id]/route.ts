@@ -18,9 +18,13 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       return NextResponse.json({ message: "Article not found" }, { status: 404 })
     }
 
+    const resolvedTheme = body.theme ?? articles[articleIndex].theme
+    const fallbackImageUrl = resolvedTheme === "boy" ? "/logo_blue.jpg" : "/logo_purple.jpg"
+
     articles[articleIndex] = {
       ...articles[articleIndex],
       ...body,
+      imageUrl: body.imageUrl === "" ? fallbackImageUrl : body.imageUrl ?? articles[articleIndex].imageUrl ?? fallbackImageUrl,
       id,
     }
 

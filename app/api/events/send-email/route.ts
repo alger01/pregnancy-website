@@ -2,6 +2,14 @@ import { NextResponse } from "next/server"
 import nodemailer from "nodemailer"
 import { getErrorMessage, getErrorStatus } from "@/lib/error-handler"
 
+function formatEur(amount: number, locale = "sq-AL") {
+  try {
+    return new Intl.NumberFormat(locale, { style: "currency", currency: "EUR" }).format(amount)
+  } catch {
+    return `€${amount.toFixed(2)}`
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json()
@@ -26,6 +34,15 @@ export async function POST(request: Request) {
 
     if (type === "registration") {
       const { event, registration } = data
+      const hasPrice = typeof event?.price === "number"
+      const hasDiscount = event?.discountActive && typeof event?.discountPrice === "number"
+      const priceHtml = hasPrice
+        ? `<p><strong>Çmimi:</strong> ${
+            hasDiscount
+              ? `${formatEur(event.price)} <span style="color:#666; text-decoration: line-through; margin-left:8px;">(origjinal)</span> &nbsp; <span style="color:#047857; font-weight:700;">${formatEur(event.discountPrice)}</span>`
+              : `${formatEur(event.price)}`
+          }</p>`
+        : ""
 
       const emailContent = {
         from: `"Nën'Harmoni" <${GMAIL_USER}>`, // sender
@@ -40,6 +57,7 @@ export async function POST(request: Request) {
               <p><strong>Data:</strong> ${new Date(event.date).toLocaleDateString("sq-AL")}</p>
               <p><strong>Ora:</strong> ${event.time}</p>
               <p><strong>Vendndodhja:</strong> ${event.location === "online" ? "Online" : event.address || "N/A"}</p>
+              ${priceHtml}
             </div>
             <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h3 style="margin-top: 0;">Të Dhënat e Pjesëmarrësit</h3>

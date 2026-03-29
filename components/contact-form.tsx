@@ -18,11 +18,27 @@ interface ContactFormProps {
   onSuccess?: () => void
 }
 
+function isDiscountActive(event: Event) {
+  if (typeof event.discountPrice !== "number") return false
+  if (!event.discountUntil) return true
+  const untilEnd = new Date(`${event.discountUntil}T23:59:59`)
+  return Date.now() <= untilEnd.getTime()
+}
+
+function formatEur(amount: number, locale: string) {
+  try {
+    return new Intl.NumberFormat(locale, { style: "currency", currency: "EUR" }).format(amount)
+  } catch {
+    return `€${amount.toFixed(2)}`
+  }
+}
+
 export function ContactForm({ event, onSuccess }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
   const { t, locale } = useTranslations()
   const dateLocale = locale === "sq" ? "sq-AL" : "en"
+  const moneyLocale = locale === "sq" ? "sq-AL" : "en"
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -104,6 +120,24 @@ export function ContactForm({ event, onSuccess }: ContactFormProps) {
                 </p>
               </div>
             </div>
+            {typeof event.price === "number" && (
+              <div className="flex items-start gap-3">
+                <div className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-medium">Çmimi</p>
+                  {isDiscountActive(event) ? (
+                    <div className="flex items-center gap-2">
+                      <span className="text-base text-muted-foreground line-through">{formatEur(event.price, moneyLocale)}</span>
+                      <span className="px-3 py-1.5 rounded-full text-sm font-bold bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">
+                        {formatEur(event.discountPrice as number, moneyLocale)}
+                      </span>
+                    </div>
+                  ) : (
+                    <p className="text-foreground text-lg font-bold">{formatEur(event.price, moneyLocale)}</p>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -140,7 +174,7 @@ export function ContactForm({ event, onSuccess }: ContactFormProps) {
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             required
-            placeholder="+355 69 123 4567"
+            placeholder="+355 69 623 4090"
           />
         </div>
 

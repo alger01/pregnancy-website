@@ -1,0 +1,50 @@
+[
+  {
+    "id": "arta-hoxha",
+    "name": "Arta Hoxha",
+    "role": "Midwife & Birth Consultant",
+    "bio": "Arta has supported hundreds of families through the birth process and postnatal period with care and expertise.",
+    "email": "arta.h@nenharmoni.al",
+    "imageUrl": "/female-midwife-caring-professional.jpg"
+  },
+  {
+    "id": "klara-berisha",
+    "name": "Dr. Klara Berisha",
+    "role": "Perinatal Psychologist",
+    "bio": "Specializing in perinatal mental health, Dr. Berisha offers support for emotional and psychological issues.",
+    "email": "klara.b@nenharmoni.al",
+    "imageUrl": "/female-psychologist-warm-professional.jpg"
+  },
+  {
+    "id": "luana-shala",
+    "name": "Luana Shala",
+    "role": "Dietitian & Nutritionist",
+    "bio": "Luana creates personalized nutrition plans for pregnant women and new mothers for optimal health.",
+    "email": "luana.s@nenharmoni.al",
+    "imageUrl": "/female-nutritionist-friendly-professional.jpg"
+  },
+  {
+    "id": "dorina-meta",
+    "name": "Dorina Meta",
+    "role": "Pediatric Nurse",
+    "bio": "With a passion for infant care, Dorina helps new parents navigate the first months with their babies.",
+    "email": "dorina.m@nenharmoni.al",
+    "imageUrl": "/female-pediatric-nurse-kind-professional.jpg"
+  },
+  {
+    "id": "fjona-dervishi",
+    "name": "Fjona Dervishi",
+    "role": "Prenatal Yoga Instructor",
+    "bio": "Fjona combines her yoga expertise with pregnancy knowledge to create safe and relaxing sessions.",
+    "email": "fjona.d@nenharmoni.al",
+    "imageUrl": "/female-yoga-instructor-peaceful-professional.jpg"
+  },
+  {
+    "id": "1773662665706",
+    "name": "geri test",
+    "role": "danoc",
+    "bio": "asknfsalfndaslkfnaslkfnaslknf",
+    "email": "adasd@gmail.com",
+    "imageUrl": ""
+  }
+]

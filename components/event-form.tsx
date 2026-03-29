@@ -30,6 +30,9 @@ export function EventForm({ event, onSuccess }: EventFormProps) {
     imageUrl: event?.imageUrl || "",
     capacity: event?.capacity?.toString() || "",
     theme: event?.theme || "girl",
+    price: event?.price?.toString() || "",
+    discountPrice: event?.discountPrice?.toString() || "",
+    discountUntil: event?.discountUntil || "",
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -46,6 +49,8 @@ export function EventForm({ event, onSuccess }: EventFormProps) {
         body: JSON.stringify({
           ...formData,
           capacity: formData.capacity ? Number.parseInt(formData.capacity) : undefined,
+          price: formData.price ? Number.parseFloat(formData.price) : undefined,
+          discountPrice: formData.discountPrice ? Number.parseFloat(formData.discountPrice) : undefined,
         }),
       })
 
@@ -153,6 +158,42 @@ export function EventForm({ event, onSuccess }: EventFormProps) {
           type="number"
           value={formData.capacity}
           onChange={(e) => setFormData({ ...formData, capacity: e.target.value })}
+        />
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <Label htmlFor="price">Çmimi (opsionale, EUR)</Label>
+          <Input
+            id="price"
+            type="number"
+            min="0"
+            step="0.01"
+            value={formData.price}
+            onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+          />
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="discountPrice">Çmimi i zbritur (opsionale, EUR)</Label>
+          <Input
+            id="discountPrice"
+            type="number"
+            min="0"
+            step="0.01"
+            value={formData.discountPrice}
+            onChange={(e) => setFormData({ ...formData, discountPrice: e.target.value })}
+          />
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="discountUntil">Zbritja e vlefshme deri më (datë opsionale)</Label>
+        <Input
+          id="discountUntil"
+          type="date"
+          value={formData.discountUntil}
+          onChange={(e) => setFormData({ ...formData, discountUntil: e.target.value })}
         />
       </div>
 

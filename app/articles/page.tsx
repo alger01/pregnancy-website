@@ -63,8 +63,8 @@ export default function ArticlesPage() {
   const dateLocale = locale === "sq" ? "sq-AL" : "en"
 
   return (
-    <main className="py-16">
-      <div className="container mx-auto px-4">
+    <main className="py-16 overflow-x-hidden">
+      <div className="container mx-auto px-4 min-w-0 max-w-full">
         <div className="max-w-3xl mx-auto text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">{t("articles.title")}</h1>
           <p className="text-lg text-muted-foreground">{t("articles.subtitle")}</p>
@@ -76,7 +76,7 @@ export default function ArticlesPage() {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 min-w-0">
               {displayedArticles.map((article) => {
                 const themeColor = article.theme === "boy" ? "#00adef" : "#b73b8f"
                 const themeBg = article.theme === "boy" ? "bg-[#00adef]/10" : "bg-[#b73b8f]/10"
@@ -84,40 +84,38 @@ export default function ArticlesPage() {
                 const themeBorder = article.theme === "boy" ? "border-[#00adef]" : "border-[#b73b8f]"
                 const themeBtnBorder = article.theme === "boy" ? "border-[#00adef]" : "border-[#b73b8f]"
                 const themeBtnHover = article.theme === "boy" ? "hover:bg-[#00adef]" : "hover:bg-[#b73b8f]"
-
+                const fallbackImage = article.theme === "boy" ? "/logo_blue.jpg" : "/logo_purple.jpg"
                 return (
                   <Card
                     key={article.id}
-                    className={`overflow-hidden border-2 ${themeBorder} hover:bg-white hover:shadow-lg transition-all flex flex-col group`}
+                    className={`overflow-hidden border-2 ${themeBorder} hover:bg-white hover:shadow-lg transition-all flex flex-col group min-w-0`}
                   >
-                    {article.imageUrl && (
-                      <div
-                        className="aspect-video w-full overflow-hidden"
-                        style={{ background: `linear-gradient(135deg, ${themeColor}15, ${themeColor}05)` }}
-                      >
-                        <img
-                          src={article.imageUrl || "/placeholder.svg"}
-                          alt={article.title}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    )}
-                    <CardHeader className="flex-grow">
+                    <div
+                      className="aspect-video w-full min-h-0 overflow-hidden flex-shrink-0"
+                      style={{ background: `linear-gradient(135deg, ${themeColor}15, ${themeColor}05)` }}
+                    >
+                      <img
+                        src={article.imageUrl || fallbackImage}
+                        alt={article.title}
+                        className="w-full h-full object-cover max-w-full"
+                      />
+                    </div>
+                    <CardHeader className="flex-grow min-w-0 overflow-hidden">
                       <div className="flex items-center gap-2 mb-3 flex-wrap">
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${themeBg} ${themeText}`}>
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium break-words max-w-full ${themeBg} ${themeText}`}>
                           {article.category}
                         </span>
-                        <span className="text-xs text-muted-foreground">
+                        <span className="text-xs text-muted-foreground break-words">
                           {new Date(article.date).toLocaleDateString(dateLocale)}
                         </span>
                       </div>
-                      <CardTitle className="text-xl mb-2">{article.title}</CardTitle>
-                      <CardDescription className="line-clamp-3">{article.excerpt}</CardDescription>
+                      <CardTitle className="text-xl mb-2 break-words min-w-0">{article.title}</CardTitle>
+                      <CardDescription className="line-clamp-3 break-words min-w-0">{article.excerpt}</CardDescription>
                     </CardHeader>
-                    <CardContent className="space-y-3">
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <CardContent className="space-y-3 min-w-0 overflow-hidden">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground min-w-0">
                         <User className="h-4 w-4 flex-shrink-0" />
-                        <span>{article.author}</span>
+                        <span className="break-words min-w-0">{article.author}</span>
                       </div>
                       <button
                         onClick={() => handleReadMore(article)}
@@ -139,37 +137,37 @@ export default function ArticlesPage() {
       {/* Reading Modal */}
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} title={selectedArticle?.title}>
         {selectedArticle && (
-          <div className="space-y-6">
-            {selectedArticle.imageUrl && (
-              <div className="aspect-video w-full overflow-hidden rounded-lg bg-gradient-to-br from-[#b73b8f]/10 to-[#00adef]/10">
-                <img
-                  src={selectedArticle.imageUrl || "/placeholder.svg"}
-                  alt={selectedArticle.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            )}
+          <div className="space-y-6 min-w-0 overflow-hidden break-words">
+            <div className="aspect-video w-full max-w-full overflow-hidden rounded-lg bg-gradient-to-br from-[#b73b8f]/10 to-[#00adef]/10">
+              <img
+                src={selectedArticle.imageUrl || (selectedArticle.theme === "boy" ? "/logo_blue.jpg" : "/logo_purple.jpg")}
+                alt={selectedArticle.title}
+                className="w-full h-full object-contain max-w-full"
+              />
+            </div>
 
-            <div className="flex items-center gap-4 flex-wrap text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <User className="h-4 w-4" />
-                <span>{selectedArticle.author}</span>
+            <div className="flex items-center gap-4 flex-wrap text-sm text-muted-foreground min-w-0">
+              <div className="flex items-center gap-2 min-w-0">
+                <User className="h-4 w-4 flex-shrink-0" />
+                <span className="break-words">{selectedArticle.author}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4" />
-                <span>{new Date(selectedArticle.date).toLocaleDateString(dateLocale)}</span>
+              <div className="flex items-center gap-2 min-w-0">
+                <Calendar className="h-4 w-4 flex-shrink-0" />
+                <span className="break-words">{new Date(selectedArticle.date).toLocaleDateString(dateLocale)}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Tag className="h-4 w-4" />
-                <span>{selectedArticle.category}</span>
+              <div className="flex items-center gap-2 min-w-0">
+                <Tag className="h-4 w-4 flex-shrink-0" />
+                <span className="break-words">{selectedArticle.category}</span>
               </div>
             </div>
 
             <div
-              className="prose prose-sm max-w-none"
+              className="prose prose-sm max-w-none break-words"
               style={{
                 whiteSpace: "pre-wrap",
                 lineHeight: "1.75",
+                wordBreak: "break-word",
+                overflowWrap: "anywhere",
               }}
             >
               {selectedArticle.content}

@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(1 0 0);
+  --background: oklch(0.985 0.005 280);
   --foreground: oklch(0.25 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.25 0 0);
@@ -37,6 +37,19 @@
   --chart-5: oklch(0.7 0.1 200);
 
   --radius: 0.75rem;
+
+  /* Section backgrounds – soft, calming palette */
+  --section-lavender: oklch(0.98 0.02 300);
+  --section-pale-blue: oklch(0.98 0.015 250);
+  --section-off-white: oklch(0.985 0.005 280);
+  --section-warm: oklch(0.985 0.008 40);
+  --section-muted: oklch(0.97 0.01 280);
+  /* Brand gradient (purple → blue) */
+  --gradient-start: #8b5cf6;
+  --gradient-mid: #7c3aed;
+  --gradient-end: #3b82f6;
+  --footer-bg: oklch(0.14 0.02 270);
+
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -121,13 +134,38 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-section-lavender: var(--section-lavender);
+  --color-section-pale-blue: var(--section-pale-blue);
+  --color-section-off-white: var(--section-off-white);
+  --color-section-warm: var(--section-warm);
+  --color-section-muted: var(--section-muted);
+  --color-footer-bg: var(--footer-bg);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    overflow-x: hidden;
+  }
   body {
     @apply bg-background text-foreground;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+}
+
+@layer utilities {
+  .bg-section-lavender { background-color: var(--section-lavender); }
+  .bg-section-pale-blue { background-color: var(--section-pale-blue); }
+  .bg-section-off-white { background-color: var(--section-off-white); }
+  .bg-section-warm { background-color: var(--section-warm); }
+  .bg-section-muted { background-color: var(--section-muted); }
+  .bg-gradient-brand {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+  }
+  .bg-gradient-brand-subtle {
+    background: linear-gradient(135deg, oklch(0.95 0.04 300) 0%, oklch(0.96 0.03 250) 100%);
   }
 }

@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { LogOut, Calendar, FileText, LayoutDashboard } from "lucide-react"
+import { LogOut, Calendar, FileText, LayoutDashboard, HeartHandshake, Users } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 
 export function AdminNav() {
@@ -71,6 +71,28 @@ export function AdminNav() {
                 <FileText className="h-4 w-4" />
                 Artikuj
               </Link>
+            <Link
+              href="/admin/services"
+              className={`flex items-center gap-2 text-sm font-medium transition-colors ${
+                pathname.startsWith("/admin/services")
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <HeartHandshake className="h-4 w-4" />
+              Shërbime
+            </Link>
+            <Link
+              href="/admin/staff"
+              className={`flex items-center gap-2 text-sm font-medium transition-colors ${
+                pathname.startsWith("/admin/staff")
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <Users className="h-4 w-4" />
+              Stafi
+            </Link>
             </div>
           </div>
 

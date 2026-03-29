@@ -11,13 +11,13 @@
       "contact": "Contact Us"
     },
     "footer": {
-      "tagline": "Professional support for women before and after pregnancy.",
+      "tagline": "A new standard in pregnancy and parenting care",
       "navigation": "Navigation",
       "resources": "Resources",
       "contact": "Contact",
       "blogAndEducation": "Blog & Education",
       "allRightsReserved": "All rights reserved.",
-      "address": "Tirana, Albania"
+      "address": "'Kongresi i Manastirit' Street, Tirana, Albania"
     }
   },
   "metadata": {
@@ -26,8 +26,8 @@
   },
   "home": {
     "hero": {
-      "title": "Your journey to motherhood, with our support",
-      "subtitle": "We offer professional education, emotional support and a warm community for every woman before and after pregnancy.",
+      "title": "A new standard in pregnancy and parenting care",
+      "subtitle": "A multidisciplinary approach that combines physiotherapy, midwifery and psychology for a personalized, safe and evidence-based experience.",
       "ctaBook": "Book a Consultation",
       "ctaAbout": "About Us"
     },
@@ -70,7 +70,7 @@
   },
   "about": {
     "title": "About Nën'Harmoni",
-    "intro": "We are a dedicated team of professionals providing full support for women before and after pregnancy. Our mission is to create a safe, warm and inclusive environment where every woman can get the information and support she needs.",
+    "intro": "NënHarmoni is a dedicated space for modern care for women before and after pregnancy. We integrate expertise in physiotherapy, midwifery and psychology to offer a comprehensive, personalized and evidence-based approach. Our mission is to create a new standard of care where every woman feels informed, supported and safe at every stage of motherhood.",
     "videoPlaceholder": "Intro Video",
     "valuesTitle": "Our Values",
     "values": {
@@ -92,7 +92,7 @@
       }
     },
     "missionTitle": "Our Mission",
-    "mission": "To provide evidence-based education, emotional support and a warm community for every woman and family facing the challenges and joys of pregnancy and new motherhood. We believe every parent deserves access to quality information and a supportive network throughout the journey."
+    "mission": "To create an experience where every woman and family experiences motherhood with more clarity, confidence and calm — especially in moments like the arrival of the first child. We aim to ease this new transition, helping parents understand the physical, emotional and relational changes that this period brings. Through professional care and a safe environment, we help everyone feel heard, respected and empowered — creating a healthy foundation for them and their family."
   },
   "contact": {
     "title": "Contact Us",
