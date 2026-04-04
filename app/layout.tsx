@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { SponsorsBanner } from "@/components/sponsors-banner"
 import { Toaster } from "@/components/ui/toaster"
 import { LanguageProvider } from "@/components/language-provider"
 import { i18n, isValidLocale, type Locale } from "@/lib/i18n-config"
@@ -52,6 +53,7 @@ export default async function RootLayout({
         <LanguageProvider initialLocale={locale} initialMessages={messages}>
           <Header />
           {children}
+          <SponsorsBanner />
           <Footer />
           <Toaster />
         </LanguageProvider>
