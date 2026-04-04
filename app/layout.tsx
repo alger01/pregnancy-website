@@ -15,8 +15,8 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Nën'Harmoni - Mbështetje për Shtatzëninë",
-  description: "Edukim, mbështetje emocionale dhe evente për femrat para dhe pas shtatzënisë",
+  title: "Nën'Harmoni - Një standard i ri në kujdesin ndaj shtatëzanisë dhe prindërimit",
+  description: "Një qasje multidisiplinare që ndërthur fizioterapinë, maminë dhe psikologjinë  për një eksperiencë të personalizuar, të sigurt dhe të bazuar në evidencë.",
   generator: "v0.app",
   icons: {
     icon: [
