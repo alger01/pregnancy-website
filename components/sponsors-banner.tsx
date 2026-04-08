@@ -15,8 +15,8 @@ export function SponsorsBanner() {
           alt="Supported by EU4Innovation, the European Union, German–Albanian development cooperation, Sweden, the Ministry of Economy and Innovation, and Partners Albania."
           width={SPONSORS_WIDTH}
           height={SPONSORS_HEIGHT}
-          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 100vw, 1200px"
-          className="mx-auto block h-auto w-full max-w-5xl select-none"
+          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 600px"
+          className="mx-auto block h-auto w-full max-w-xl select-none"
           draggable={false}
         />
       </div>
