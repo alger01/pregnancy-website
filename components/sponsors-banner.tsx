@@ -16,7 +16,7 @@ export function SponsorsBanner() {
           width={SPONSORS_WIDTH}
           height={SPONSORS_HEIGHT}
           sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 600px"
-          className="mx-auto block h-auto w-full max-w-xl select-none"
+          className="mx-auto block h-auto w-full max-w-lg select-none"
           draggable={false}
         />
       </div>
